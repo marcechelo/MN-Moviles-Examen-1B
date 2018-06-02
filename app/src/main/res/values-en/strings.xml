@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MN-Moviles-Examen-1B</string>
+    <string name="botonCrear">Create</string>
+    <string name="botonListar">List</string>
+    <string name="botonDetalle">Detail</string>
+    <string name="botonNuevo">New</string>
+</resources>
