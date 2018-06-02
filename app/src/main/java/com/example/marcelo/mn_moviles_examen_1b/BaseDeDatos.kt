@@ -13,10 +13,10 @@ class BaseDeDatos {
 
     companion object BaseDeDatos{
 
-        val BDD_NOMBRE = "plicacion"
+        val BDD_NOMBRE = "aplicacion"
 
         val BDD_TABLA_SO_NOMBRE =   "sistemaOperativo"
-        val BDD_TABLA_SO_CAMPO_ID = "idSo"
+        //val BDD_TABLA_SO_CAMPO_ID = "idSo"
         val BDD_TABLA_SO_CAMPO_NOMBRE = "nombreSo"
         val BDD_TABLA_SO_CAMPO_VERSIONAPI = "versionApi"
         val BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO = "fechaLanzamientoSo"
@@ -24,7 +24,7 @@ class BaseDeDatos {
         val BDD_TABLA_SO_CAMPO_INSTALADO = "instalado"
 
         val BDD_TABLA_APLICACION_NOMBRE =   "aplicacion"
-        val BDD_TABLA_APLICACIO_CAMPO_ID = "idApp"
+        //val BDD_TABLA_APLICACIO_CAMPO_ID = "idApp"
         val BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS = "pesoEnGigasApp"
         val BDD_TABLA_APLICACIO_CAMPO_VERSION = "version"
         val BDD_TABLA_APLICACIO_CAMPO_NOMBRE = "nombreApp"
@@ -42,16 +42,14 @@ class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTableSo = "CREATE TABLE ${BaseDeDatos.BDD_TABLA_SO_NOMBRE} " +
-                "(${BaseDeDatos.BDD_TABLA_SO_CAMPO_ID} INTEGER PRIMARY KEY AUTOINCREMENT" +
-                "${BaseDeDatos.BDD_TABLA_SO_CAMPO_NOMBRE} VARCHAR(60)," +
+                "(${BaseDeDatos.BDD_TABLA_SO_CAMPO_NOMBRE} VARCHAR(60)," +
                 "${BaseDeDatos.BDD_TABLA_SO_CAMPO_VERSIONAPI} INTEGER," +
-                "${BaseDeDatos.BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO} DATE," +
+                "${BaseDeDatos.BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO} VARCHAR(60)," +
                 "${BaseDeDatos.BDD_TABLA_SO_CAMPO_PESOENGIGAS} DOUBLE," +
                 "${BaseDeDatos.BDD_TABLA_SO_CAMPO_INSTALADO} BOOLEAN)"
 
         val createTableApp = "CREATE TABLE ${BaseDeDatos.BDD_TABLA_APLICACION_NOMBRE} " +
-                "(${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_ID} INTEGER PRIMARY KEY AUTOINCREMENT" +
-                "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS} DOUBLE," +
+                "(${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS} DOUBLE," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_VERSION} INTEGER," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_NOMBRE} VARCHAR(60)," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_URLDESCARGA} VARCHAR(100)," +

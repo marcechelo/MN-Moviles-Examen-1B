@@ -24,6 +24,7 @@ import java.util.*
 class ListarSOActivity : AppCompatActivity() {
 
     var sistemOp = ArrayList<SistemaOperativo>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar_so)

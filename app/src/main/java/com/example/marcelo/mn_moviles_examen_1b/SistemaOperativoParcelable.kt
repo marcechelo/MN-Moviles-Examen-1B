@@ -6,14 +6,14 @@ import java.util.*
 
 class SistemaOperativoParcelable (var nombre:String,
                                   var versionApi:Int,
-                                  var fechaLanzamaineto: Date?,
+                                  var fechaLanzamaineto: String,
                                   var pesoEnGigas:Double,
                                   var instalado:Boolean): Parcelable {
 
     constructor(parcel: Parcel):this(
             parcel.readString(),
             parcel.readInt(),
-            parcel.leerDate(),
+            parcel.readString(),
             parcel.readDouble(),
             parcel.readByte() != 0.toByte()){
 
@@ -22,7 +22,7 @@ class SistemaOperativoParcelable (var nombre:String,
     override fun writeToParcel(dest: Parcel?, flags: Int) {
         dest?.writeString(nombre)
         dest?.writeInt(versionApi)
-        dest?.escribirDate(fechaLanzamaineto)
+        dest?.writeString(fechaLanzamaineto)
         dest?.writeByte((if(instalado)1 else 0).toByte())
     }
 

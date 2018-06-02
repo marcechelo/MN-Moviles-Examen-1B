@@ -65,13 +65,11 @@
                             android:id="@+id/edit_version_api"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/edit_nombre"
-                            android:layout_centerVertical="true"
                             android:layout_marginStart="16dp"
                             android:ems="10"
-                            android:inputType="number"
+                            android:inputType="textPersonName"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView16"/>
 
                         <TextView
                             android:id="@+id/textView17"
@@ -116,7 +114,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
                         <CheckBox
-                            android:id="@+id/checkBox"
+                            android:id="@+id/cb_instalado"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/edit_peso"
