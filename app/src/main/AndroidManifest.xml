@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListarSOActivity" />
-        <activity android:name=".DetalleSOActivity"></activity>
+        <activity android:name=".DetalleSOActivity" />
+        <activity android:name=".CrearSoActivity"></activity>
     </application>
 
 </manifest>

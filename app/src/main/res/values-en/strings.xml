@@ -4,4 +4,5 @@
     <string name="botonListar">List</string>
     <string name="botonDetalle">Detail</string>
     <string name="botonNuevo">New</string>
+    <string name="botonGuardar">Save</string>
 </resources>

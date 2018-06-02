@@ -4,15 +4,19 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.graphics.drawable.AdaptiveIconDrawable
 import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
 class BaseDeDatos {
-    companion object {
+
+    companion object BaseDeDatos{
+
         val BDD_NOMBRE = "plicacion"
 
         val BDD_TABLA_SO_NOMBRE =   "sistemaOperativo"
+        val BDD_TABLA_SO_CAMPO_ID = "idSo"
         val BDD_TABLA_SO_CAMPO_NOMBRE = "nombreSo"
         val BDD_TABLA_SO_CAMPO_VERSIONAPI = "versionApi"
         val BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO = "fechaLanzamientoSo"
@@ -20,6 +24,7 @@ class BaseDeDatos {
         val BDD_TABLA_SO_CAMPO_INSTALADO = "instalado"
 
         val BDD_TABLA_APLICACION_NOMBRE =   "aplicacion"
+        val BDD_TABLA_APLICACIO_CAMPO_ID = "idApp"
         val BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS = "pesoEnGigasApp"
         val BDD_TABLA_APLICACIO_CAMPO_VERSION = "version"
         val BDD_TABLA_APLICACIO_CAMPO_NOMBRE = "nombreApp"
@@ -27,27 +32,32 @@ class BaseDeDatos {
         val BDD_TABLA_APLICACIO_CAMPO_FECHALANZAMIENTO = "fechaLanzamientoApp"
         val BDD_TABLA_APLICACIO_CAMPO_COSTO = "costo"
         val BDD_TABLA_APLICACIO_CAMPO_SISTEMAOPERATIVOID = "sistemaOperativoId"
+
+
     }
+
 }
 
 class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos.BDD_NOMBRE,null,1){
 
     override fun onCreate(db: SQLiteDatabase?) {
         val createTableSo = "CREATE TABLE ${BaseDeDatos.BDD_TABLA_SO_NOMBRE} " +
-                "(${BaseDeDatos.BDD_TABLA_SO_CAMPO_NOMBRE} VARCHAR(60)," +
+                "(${BaseDeDatos.BDD_TABLA_SO_CAMPO_ID} INTEGER PRIMARY KEY AUTOINCREMENT" +
+                "${BaseDeDatos.BDD_TABLA_SO_CAMPO_NOMBRE} VARCHAR(60)," +
                 "${BaseDeDatos.BDD_TABLA_SO_CAMPO_VERSIONAPI} INTEGER," +
                 "${BaseDeDatos.BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO} DATE," +
                 "${BaseDeDatos.BDD_TABLA_SO_CAMPO_PESOENGIGAS} DOUBLE," +
                 "${BaseDeDatos.BDD_TABLA_SO_CAMPO_INSTALADO} BOOLEAN)"
 
         val createTableApp = "CREATE TABLE ${BaseDeDatos.BDD_TABLA_APLICACION_NOMBRE} " +
-                "(${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS} DOUBLE," +
+                "(${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_ID} INTEGER PRIMARY KEY AUTOINCREMENT" +
+                "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS} DOUBLE," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_VERSION} INTEGER," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_NOMBRE} VARCHAR(60)," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_URLDESCARGA} VARCHAR(100)," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_FECHALANZAMIENTO} DATE," +
                 "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_COSTO} DOUBLE," +
-                "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_SISTEMAOPERATIVOID} VARCHAR(60))"
+                "${BaseDeDatos.BDD_TABLA_APLICACIO_CAMPO_SISTEMAOPERATIVOID} INTEGER)"
 
         db?.execSQL(createTableSo)
         db?.execSQL(createTableApp)
@@ -57,9 +67,9 @@ class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    fun insertrSo(nombre: String,
+    fun insertarSo(nombre: String,
                   versionApi: Int,
-                  fechaLanzamiento: Date,
+                  fechaLanzamiento: String,
                   pesoEnGigas:Double,
                   instaldo:Boolean){
 
@@ -68,7 +78,7 @@ class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos
 
         cv.put(BaseDeDatos.BDD_TABLA_SO_CAMPO_NOMBRE,nombre)
         cv.put(BaseDeDatos.BDD_TABLA_SO_CAMPO_VERSIONAPI,versionApi)
-        cv.put(BaseDeDatos.BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO,toSimpleString(fechaLanzamiento))
+        cv.put(BaseDeDatos.BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO,fechaLanzamiento)
         cv.put(BaseDeDatos.BDD_TABLA_SO_CAMPO_PESOENGIGAS,pesoEnGigas)
         cv.put(BaseDeDatos.BDD_TABLA_SO_CAMPO_INSTALADO,instaldo)
 
@@ -86,7 +96,7 @@ class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos
                    urlDescarga: String,
                    fechaLanzamiento: Date,
                    costo: Double,
-                   sistemaOperativoId: String){
+                   sistemaOperativoId: Int){
 
         val dbWriteable = writableDatabase
         val cv = ContentValues()
@@ -107,15 +117,22 @@ class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos
 
     }
 
+
     fun leerDatosSo(){
 
         val dbReadable = readableDatabase
         val query = "SELECT * FROM ${BaseDeDatos.BDD_TABLA_SO_NOMBRE}"
         val resultado = dbReadable.rawQuery(query,null)
 
-        if (resultado.moveToFirst()){
-            
+        if (resultado.moveToFirst()) {
+            do {
+                val nombreActual = resultado.getString(0)
+                val versionApi = resultado.getString(1).toInt()
+                Log.i("database", "El nombre es $nombreActual con version $versionApi")
+            } while (resultado.moveToNext())
         }
+        resultado.close()
+        dbReadable.close()
     }
 
     fun toSimpleString(date: Date?) = with(date ?: Date()) {
@@ -123,4 +140,3 @@ class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos
     }
 
 }
-
