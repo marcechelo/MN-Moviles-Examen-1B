@@ -4,3 +4,50 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.*
 
+class SistemaOperativoParcelable (var nombre:String,
+                                  var versionApi:Int,
+                                  var fechaLanzamaineto: Date?,
+                                  var pesoEnGigas:Double,
+                                  var instalado:Boolean): Parcelable {
+
+    constructor(parcel: Parcel):this(
+            parcel.readString(),
+            parcel.readInt(),
+            parcel.leerDate(),
+            parcel.readDouble(),
+            parcel.readByte() != 0.toByte()){
+
+    }
+
+    override fun writeToParcel(dest: Parcel?, flags: Int) {
+        dest?.writeString(nombre)
+        dest?.writeInt(versionApi)
+        dest?.escribirDate(fechaLanzamaineto)
+        dest?.writeByte((if(instalado)1 else 0).toByte())
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<SistemaOperativoParcelable>{
+        override fun createFromParcel(source: Parcel): SistemaOperativoParcelable {
+            return SistemaOperativoParcelable(source)
+        }
+
+        override fun newArray(size: Int): Array<SistemaOperativoParcelable?> {
+            return arrayOfNulls(size)
+        }
+    }
+
+
+}
+
+fun Parcel.escribirDate(date:Date?){
+    writeLong(date?.time?: -1)
+}
+
+fun Parcel.leerDate(): Date? {
+    val long = readLong()
+    return if (long != -1L) Date(long) else null
+}
