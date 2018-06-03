@@ -18,7 +18,9 @@
         </activity>
         <activity android:name=".ListarSOActivity" />
         <activity android:name=".DetalleSOActivity" />
-        <activity android:name=".CrearSoActivity"></activity>
+        <activity android:name=".CrearSoActivity" />
+        <activity android:name=".CrearAppActivity" />
+        <activity android:name=".DetalleAppActivity"></activity>
     </application>
 
 </manifest>

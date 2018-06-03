@@ -1,5 +1,6 @@
 package com.example.marcelo.mn_moviles_examen_1b
 
+import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_crear_app.*
 import kotlinx.android.synthetic.main.activity_detalle_so.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -29,6 +31,13 @@ class DetalleSOActivity : AppCompatActivity() {
         recycler_view_app.itemAnimator = DefaultItemAnimator()
         recycler_view_app.adapter = adaptador1
         adaptador1.notifyDataSetChanged()
+
+        boton_so_crear.setOnClickListener{view: View -> irAAtividadCrearApp()}
+    }
+
+    fun irAAtividadCrearApp(){
+        var intent = Intent(this,CrearAppActivity::class.java)
+        startActivity(intent)
     }
 }
 
