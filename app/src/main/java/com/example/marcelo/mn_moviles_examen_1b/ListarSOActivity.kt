@@ -12,12 +12,12 @@ import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_listar_so.*
 import java.util.*
 
@@ -58,25 +58,51 @@ class CrearSistemOperativo(){
     }
 }
 
-class SistemaOperativoAdaptador(private val listaSistema: List<SistemaOperativo>): RecyclerView.Adapter<SistemaOperativoAdaptador.MyViewHolder>(){
+class SistemaOperativoAdaptador(private val listaSistema: List<SistemaOperativo>): RecyclerView.Adapter<SistemaOperativoAdaptador.MyViewHolder>(),
+        PopupMenu.OnMenuItemClickListener{
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
+        override fun onMenuItemClick(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            R.id.item_menu_aceptar -> {
+                Log.i("menu", "Editar")
+                return true
+            }
+            R.id.item_menu_cancelar -> {
+                Log.i("menu", "Eliminar")
+                return true
+            }
+            R.id.item_menu_correo -> {
+                Log.i("menu", "Correo")
+                return true
+            }
+            else -> {
+                Log.i("menu", "Todos los demas")
+                return false
+            }
+        }
+    }
+
+    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         var nombre: TextView
         var versionApi: TextView
         var pesoEnGigas: TextView
         lateinit var sistema: SistemaOperativo
         var botonDetalle: Button
+        var layout: RelativeLayout
 
         init {
             nombre = view.findViewById(R.id.txtv_nombre) as TextView
             versionApi = view.findViewById(R.id.txtv_detalle1) as TextView
             pesoEnGigas = view.findViewById(R.id.txtv_detalle2) as TextView
             botonDetalle = view.findViewById(R.id.boton_detalle) as Button
+            layout = view.findViewById(R.id.relative_layout) as RelativeLayout
 
-            val layout = view.findViewById(R.id.relative_layout) as RelativeLayout
-            layout.setOnClickListener({v ->
+            /*layout.setOnClickListener({v ->
                 val nombreActual = v.findViewById(R.id.txtv_nombre) as TextView
-            })
+                val toast = Toast.makeText(v.context, "algo", Toast.LENGTH_LONG)
+                toast.show()
+            })*/
         }
 
     }
@@ -98,6 +124,14 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SistemaOperativo>
         holder.botonDetalle.setOnClickListener{v ->
             val intent = Intent(v.context,DetalleSOActivity::class.java)
             startActivity(v.context, intent, null)
+        }
+
+        holder.layout.setOnClickListener{view ->
+            val popup = PopupMenu(view.context,view)
+            popup.setOnMenuItemClickListener(this)
+            val inflater = popup.menuInflater
+            inflater.inflate(R.menu.pop_up_menu, popup.menu)
+            popup.show()
         }
 
 
