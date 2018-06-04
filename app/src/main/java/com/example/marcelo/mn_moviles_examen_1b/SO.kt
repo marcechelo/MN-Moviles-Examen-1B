@@ -43,11 +43,4 @@ class SO(var id: Int,
         }
     }
 
-    fun obtenerApp(context: Context): ArrayList<App> {
-        var lista = ArrayList<App>()
-        val dbHandler = DbHandlerApp(context)
-        lista = dbHandler.leerApp()
-        return lista
-    }
-
 }

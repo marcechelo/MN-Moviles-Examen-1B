@@ -117,12 +117,15 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val sistema = listaSistema[position]
         holder.nombre.text = sistema.nombre
-        holder.versionApi.text = sistema.versionApi.toString()
-        holder.pesoEnGigas.text = sistema.pesoEnGigas.toString()
+        holder.versionApi.text = "Version Api " + sistema.versionApi.toString()
+        holder.pesoEnGigas.text = "Peso " + sistema.pesoEnGigas.toString() + " Gigas"
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
+
+        val sistemaIntent = SO(sistema.id,sistema.nombre, sistema.versionApi, sistema.fechaLanzamiento, sistema.pesoEnGigas,sistema.instalado)
 
         holder.botonDetalle.setOnClickListener{v ->
             val intent = Intent(v.context,DetalleSOActivity::class.java)
+            intent.putExtra("sistema",sistemaIntent)
             startActivity(v.context, intent, null)
         }
 

@@ -14,21 +14,34 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.PopupMenu
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_crear_app.*
 import kotlinx.android.synthetic.main.activity_detalle_so.*
+import kotlinx.android.synthetic.main.activity_detalle_so.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 class DetalleSOActivity : AppCompatActivity() {
 
     var aplicaciones = ArrayList<Aplicacion>()
+    //var sistemaIntent: SO? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_so)
+
+        val sistemaIntent:SO = intent.getParcelableExtra("sistema")
+        //val sistemaGuardado: SO? = savedInstanceState?.get("sistemaIntent") as SO?
+        val id = sistemaIntent.id
+        txtv_nombre_so.text = sistemaIntent.nombre
+        txtv_version_so.text = sistemaIntent.versionApi.toString()
+        txtv_fecha_so.text = sistemaIntent.fechaLanzamiento
+        txtv_peso_so.text = sistemaIntent.pesoEnGigas.toString()
+        if(sistemaIntent.instalado ===1){
+            txtv_instaldo_so.text = "trues"
+        }else txtv_instaldo_so.text = "false"
+
+        val toast = Toast.makeText(this, id.toString() ,Toast.LENGTH_SHORT)
+        toast.show()
 
         val layoutManager = LinearLayoutManager(this)
         aplicaciones = CrearAplicacion.aplicacion
