@@ -67,9 +67,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:ems="10"
-                            android:inputType="textPersonName"
+                            android:inputType="number"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView16"/>
+                            app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                         <TextView
                             android:id="@+id/textView17"
@@ -88,7 +88,7 @@
                             android:layout_below="@+id/edit_version_api"
                             android:layout_marginStart="16dp"
                             android:ems="10"
-                            android:inputType="date"
+                            android:inputType="text|number|date"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
