@@ -10,35 +10,9 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    //lateinit var dbHandler: DbHandlerAplicacion
-    companion object BaseDeDatos{
-        lateinit var dbHandler: DbHandlerAplicacion
-
-        fun crearSo(nombre: String,
-                 versionApi: Int,
-                 fechaLanzamiento: String,
-                 pesoEnGigas:Double,
-                 instaldo:Boolean)= dbHandler.insertarSo(nombre,versionApi,fechaLanzamiento,pesoEnGigas,instaldo)
-
-        fun crearApp(pesoEnGigas: Double,
-                     version: Int,
-                     nombre: String,
-                     urlDescarga: String,
-                     fechaLanzamiento: Date,
-                     costo: Double,
-                     sistemaOperativoId: Int) = dbHandler.insertrApp(pesoEnGigas,version,nombre,urlDescarga,fechaLanzamiento,costo,sistemaOperativoId)
-
-        fun leer()= dbHandler.leerDatosSo()
-
-    }
-
-    //lateinit var dbHandler: DbHandlerAplicacion
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        dbHandler = DbHandlerAplicacion(this)
-
 
         boton_listar.setOnClickListener { view: View -> irAActividadListarSo() }
         boton_crear.setOnClickListener { view: View -> irAActividadCrearSo() }

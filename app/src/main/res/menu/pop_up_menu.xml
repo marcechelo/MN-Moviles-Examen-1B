@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/item_menu_cancelar"
-        android:title="Cancelar" />
+        android:id="@+id/item_menu_editar"
+        android:title="Editar" />
     <item
-        android:id="@+id/item_menu_aceptar"
-        android:title="Aceptar" />
+        android:id="@+id/item_menu_eliminar"
+        android:title="Eliminar" />
 
     <item
         android:id="@+id/item_menu_correo"

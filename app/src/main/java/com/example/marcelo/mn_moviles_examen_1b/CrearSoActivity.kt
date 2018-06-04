@@ -10,14 +10,13 @@ import java.util.*
 
 class CrearSoActivity : AppCompatActivity() {
 
+    lateinit var dbHandler: DbHandlerSo
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crear_so)
 
-        //val dbHandler = DbHandlerAplicacion(this)
-
-        //MainActivity.BaseDeDatos.crearSo("algo1",1, "09/04/2010",1.1,true)
-        //MainActivity.BaseDeDatos.leer()
+        dbHandler = DbHandlerSo(this)
 
         boton_guardar.setOnClickListener{view: View ->
 
@@ -28,11 +27,14 @@ class CrearSoActivity : AppCompatActivity() {
                 val toast = Toast.makeText(this,"Todos los campos deben estra lleno",Toast.LENGTH_SHORT)
                 toast.show()
             }else{
-                val nombre = edit_nombre.text.toString()
-                val version = edit_version_api.text.toString().toDouble()
-                val fecha = edit_fecha.text.toString()
-                val api = edit_version_api.text.toString().toDouble()
-                val instaldo:Boolean = cb_instalado.isChecked()
+                var nombre = edit_nombre.text.toString()
+                var version = edit_version_api.text.toString().toInt()
+                var fecha = edit_fecha.text.toString()
+                var peso = edit_peso.text.toString().toDouble()
+                var instaldo = if (cb_instalado.isChecked) 1 else 0
+                var so = SO(0, nombre, version, fecha, peso, instaldo)
+
+                dbHandler.insertarSo(so)
                 irAActividadListarOs()
             }
         }

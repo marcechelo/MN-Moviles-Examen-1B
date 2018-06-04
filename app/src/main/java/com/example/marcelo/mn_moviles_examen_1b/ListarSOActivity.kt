@@ -1,13 +1,9 @@
 package com.example.marcelo.mn_moviles_examen_1b
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
-import android.support.v4.content.ContextCompat
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
@@ -23,18 +19,24 @@ import java.util.*
 
 class ListarSOActivity : AppCompatActivity() {
 
-    var sistemOp = ArrayList<SistemaOperativo>()
+    lateinit var sistemOp: ArrayList<SO>
+    lateinit var dbHandler: DbHandlerSo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar_so)
+
+        dbHandler = DbHandlerSo(this)
+        sistemOp = dbHandler.leerSo()
         val layoutManager = LinearLayoutManager(this)
-        sistemOp = CrearSistemOperativo.sistemaOp
+        //sistemOp = CrearSistemOperativo.sistemaOp
         val adaptador = SistemaOperativoAdaptador(sistemOp)
         recycler_view.layoutManager = layoutManager
         recycler_view.itemAnimator = DefaultItemAnimator()
         recycler_view.adapter = adaptador
         adaptador.notifyDataSetChanged()
+
+        registerForContextMenu(recycler_view)
 
     }
 }
@@ -46,28 +48,28 @@ class SistemaOperativo(var nombre:String,
                        var pesoEnGigas:Double,
                        var instalado:Boolean){}
 
-class CrearSistemOperativo(){
+/*class CrearSistemOperativo(){
     companion object {
 
-        var sistemaOp: ArrayList<SistemaOperativo> = ArrayList()
+        var sistemaOp: ArrayList<SO> = ArrayList()
 
         init {
             sistemaOp.add(SistemaOperativo("algo1",1, "",1.1,true))
             sistemaOp.add(SistemaOperativo("algo2",2, "",1.2,false))
         }
     }
-}
+}*/
 
-class SistemaOperativoAdaptador(private val listaSistema: List<SistemaOperativo>): RecyclerView.Adapter<SistemaOperativoAdaptador.MyViewHolder>(),
+class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerView.Adapter<SistemaOperativoAdaptador.MyViewHolder>(),
         PopupMenu.OnMenuItemClickListener{
 
         override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.getItemId()) {
-            R.id.item_menu_aceptar -> {
+            R.id.item_menu_editar -> {
                 Log.i("menu", "Editar")
                 return true
             }
-            R.id.item_menu_cancelar -> {
+            R.id.item_menu_eliminar -> {
                 Log.i("menu", "Eliminar")
                 return true
             }
@@ -87,7 +89,7 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SistemaOperativo>
         var nombre: TextView
         var versionApi: TextView
         var pesoEnGigas: TextView
-        lateinit var sistema: SistemaOperativo
+        lateinit var sistema: SO
         var botonDetalle: Button
         var layout: RelativeLayout
 
@@ -114,11 +116,9 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SistemaOperativo>
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val sistema = listaSistema[position]
-        holder.nombre.setText(sistema.nombre)
-        val versApi = sistema.versionApi.toString()
-        holder.versionApi.setText(versApi)
-        val peso = sistema.pesoEnGigas.toString()
-        holder.pesoEnGigas.setText(peso)
+        holder.nombre.text = sistema.nombre
+        holder.versionApi.text = sistema.versionApi.toString()
+        holder.pesoEnGigas.text = sistema.pesoEnGigas.toString()
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
 
         holder.botonDetalle.setOnClickListener{v ->

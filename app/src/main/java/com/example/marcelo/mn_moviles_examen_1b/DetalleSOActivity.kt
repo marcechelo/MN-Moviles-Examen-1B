@@ -73,11 +73,11 @@ class AplicacionAdaptador(private val listaAplicaciones: List<Aplicacion>): Recy
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.getItemId()) {
-            R.id.item_menu_aceptar -> {
+            R.id.item_menu_editar -> {
                 Log.i("menu", "Editar")
                 return true
             }
-            R.id.item_menu_cancelar -> {
+            R.id.item_menu_eliminar -> {
                 Log.i("menu", "Eliminar")
                 return true
             }
