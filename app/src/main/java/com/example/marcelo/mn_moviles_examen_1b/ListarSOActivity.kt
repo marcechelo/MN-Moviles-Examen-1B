@@ -42,7 +42,7 @@ class ListarSOActivity : AppCompatActivity() {
 
 class SistemaOperativo(var nombre:String,
                        var versionApi:Int,
-                       var fechaLanzamaineto: Date,
+                       var fechaLanzamaineto: String,
                        var pesoEnGigas:Double,
                        var instalado:Boolean){}
 
@@ -52,8 +52,8 @@ class CrearSistemOperativo(){
         var sistemaOp: ArrayList<SistemaOperativo> = ArrayList()
 
         init {
-            sistemaOp.add(SistemaOperativo("algo1",1, Date(),1.1,true))
-            sistemaOp.add(SistemaOperativo("algo2",2, Date(),1.2,false))
+            sistemaOp.add(SistemaOperativo("algo1",1, "",1.1,true))
+            sistemaOp.add(SistemaOperativo("algo2",2, "",1.2,false))
         }
     }
 }

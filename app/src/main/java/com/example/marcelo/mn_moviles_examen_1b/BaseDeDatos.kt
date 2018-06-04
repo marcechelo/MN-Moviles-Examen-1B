@@ -8,6 +8,7 @@ import android.graphics.drawable.AdaptiveIconDrawable
 import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class BaseDeDatos {
 
@@ -116,21 +117,27 @@ class DbHandlerAplicacion(context:Context): SQLiteOpenHelper(context,BaseDeDatos
     }
 
 
-    fun leerDatosSo(){
+    fun leerDatosSo():ArrayList<SistemaOperativo>{
 
+        val arreglo = ArrayList<SistemaOperativo>()
         val dbReadable = readableDatabase
         val query = "SELECT * FROM ${BaseDeDatos.BDD_TABLA_SO_NOMBRE}"
         val resultado = dbReadable.rawQuery(query,null)
 
         if (resultado.moveToFirst()) {
             do {
-                val nombreActual = resultado.getString(0)
-                val versionApi = resultado.getString(1).toInt()
-                Log.i("database", "El nombre es $nombreActual con version $versionApi")
+                arreglo.add(SistemaOperativo(resultado.getString(0),
+                        resultado.getString(1).toInt(),
+                        resultado.getString(2),
+                        resultado.getString(3).toDouble(),
+                        resultado.getString(4).toBoolean()
+                        ))
+                //Log.i("database", "El nombre es $nombreActual con version $versionApi")
             } while (resultado.moveToNext())
         }
         resultado.close()
         dbReadable.close()
+        return arreglo
     }
 
     fun toSimpleString(date: Date?) = with(date ?: Date()) {
