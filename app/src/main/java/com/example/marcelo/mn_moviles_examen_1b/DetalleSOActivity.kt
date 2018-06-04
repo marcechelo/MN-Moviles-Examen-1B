@@ -18,45 +18,59 @@ import android.widget.*
 import kotlinx.android.synthetic.main.activity_crear_app.*
 import kotlinx.android.synthetic.main.activity_detalle_so.*
 import kotlinx.android.synthetic.main.activity_detalle_so.view.*
+import kotlinx.android.synthetic.main.activity_listar_so.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 class DetalleSOActivity : AppCompatActivity() {
 
-    var aplicaciones = ArrayList<Aplicacion>()
-    //var sistemaIntent: SO? = null
+    //var aplicaciones = ArrayList<Aplicacion>()
+    lateinit var aplicaciones: java.util.ArrayList<App>
+    lateinit var dbHandler: DbHandlerApp
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_so)
 
-        val sistemaIntent:SO = intent.getParcelableExtra("sistema")
+        dbHandler = DbHandlerApp(this)
+        aplicaciones = dbHandler.leerApp()
+
+        val sistemaIntent: SO = intent.getParcelableExtra("sistema")
         //val sistemaGuardado: SO? = savedInstanceState?.get("sistemaIntent") as SO?
         val id = sistemaIntent.id
         txtv_nombre_so.text = sistemaIntent.nombre
         txtv_version_so.text = sistemaIntent.versionApi.toString()
         txtv_fecha_so.text = sistemaIntent.fechaLanzamiento
         txtv_peso_so.text = sistemaIntent.pesoEnGigas.toString()
-        if(sistemaIntent.instalado ===1){
+        if (sistemaIntent.instalado === 1) {
             txtv_instaldo_so.text = "trues"
-        }else txtv_instaldo_so.text = "false"
+        } else txtv_instaldo_so.text = "false"
 
-        val toast = Toast.makeText(this, id.toString() ,Toast.LENGTH_SHORT)
+        val toast = Toast.makeText(this, id.toString(), Toast.LENGTH_SHORT)
         toast.show()
 
         val layoutManager = LinearLayoutManager(this)
-        aplicaciones = CrearAplicacion.aplicacion
+        //aplicaciones = CrearAplicacion.aplicacion
         val adaptador1 = AplicacionAdaptador(aplicaciones)
         recycler_view_app.layoutManager = layoutManager
         recycler_view_app.itemAnimator = DefaultItemAnimator()
         recycler_view_app.adapter = adaptador1
         adaptador1.notifyDataSetChanged()
+        registerForContextMenu(recycler_view)
 
-        boton_so_crear.setOnClickListener{view: View -> irAAtividadCrearApp()}
-    }
+        boton_so_crear.setOnClickListener { view: View ->
+            val intent = Intent(this, CrearAppActivity::class.java)
+            intent.putExtra("so", sistemaIntent)
+            startActivity(intent)
+            //irAAtividadCrearApp()}
+        }
 
-    fun irAAtividadCrearApp(){
-        var intent = Intent(this,CrearAppActivity::class.java)
-        startActivity(intent)
+        fun irAAtividadCrearApp() {
+            var intent = Intent(this, CrearAppActivity::class.java)
+            //intent.putExtra("sistemaid",this.sistemaIntent)
+            startActivity(this, intent, null)
+        }
     }
 }
 
@@ -81,7 +95,7 @@ class CrearAplicacion(){
     }
 }
 
-class AplicacionAdaptador(private val listaAplicaciones: List<Aplicacion>): RecyclerView.Adapter<AplicacionAdaptador.MyViewHolder>(),
+class AplicacionAdaptador(private val listaAplicaciones: List<App>): RecyclerView.Adapter<AplicacionAdaptador.MyViewHolder>(),
         PopupMenu.OnMenuItemClickListener{
 
     override fun onMenuItemClick(item: MenuItem): Boolean {
@@ -129,9 +143,9 @@ class AplicacionAdaptador(private val listaAplicaciones: List<Aplicacion>): Recy
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val aplicacion = listaAplicaciones[position]
-        holder.nombre.setText(aplicacion.nombre)
-        holder.costo.setText(aplicacion.costo)
-        holder.urlDescarga.setText(aplicacion.urlDescarga)
+        holder.nombre.text = aplicacion.nombre
+        holder.costo.text = aplicacion.costo.toString()
+        holder.urlDescarga.text = aplicacion.urlDescarga
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
         holder.botonDetalle.setOnClickListener{view:View ->
             var intent = Intent(view.context,DetalleAppActivity::class.java)
