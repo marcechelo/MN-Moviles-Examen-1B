@@ -28,7 +28,7 @@ class CrearAppActivity : AppCompatActivity() {
             soId = aplicacion?.sistemaOperativoId!!
             llenar()
             tipo = true
-        }else soId = intent.getIntExtra("sistemaId",0)
+        }else {soId = intent.getIntExtra("sistemaId",0)}
 
 
         dbHnadler = DbHandlerApp(this)
@@ -79,7 +79,7 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(0,nombre,peso,version,url,fecha,costo,soId)
+                    var app = App(aplicacion?.appid!!,nombre,peso,version,url,fecha,costo,soId)
                     dbHnadler.updateApp(app)
                     irAActividadDetalleSo()
                 }
