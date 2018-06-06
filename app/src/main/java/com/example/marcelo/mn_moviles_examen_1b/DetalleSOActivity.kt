@@ -45,15 +45,18 @@ class DetalleSOActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         adaptador = AplicacionAdaptador(aplicaciones)
+        adaptador.notifyDataSetChanged()
         recycler_view_app.layoutManager = layoutManager
         recycler_view_app.itemAnimator = DefaultItemAnimator()
         recycler_view_app.adapter = adaptador
-        adaptador.notifyDataSetChanged()
+        recycler_view_app.invalidate()
         registerForContextMenu(recycler_view_app)
 
         boton_so_crear.setOnClickListener { view: View ->
             irAAtividadCrearApp()
+            finish()
         }
+
     }
 
     fun irAAtividadCrearApp() {
@@ -76,6 +79,7 @@ class DetalleSOActivity : AppCompatActivity() {
                 intent.putExtra("app",aplicacion)
                 intent.putExtra("sistema",SisteOp)
                 startActivity(intent)
+                finish()
                 return true
                 Log.i("error","intent ${intent}")
             }
@@ -88,6 +92,14 @@ class DetalleSOActivity : AppCompatActivity() {
                 }).setNegativeButton("No",null)
                 val dialogo = builder.create()
                 dialogo.show()
+                return true
+            }
+            R.id.item_menu_compartir -> {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/html"
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Examen Moviles - SO y Aplicaciones")
+                intent.putExtra(Intent.EXTRA_TEXT,"Datos del Sistema Operativo - ${aplicacion}" )
+                startActivity(intent)
                 return true
             }
             else -> {

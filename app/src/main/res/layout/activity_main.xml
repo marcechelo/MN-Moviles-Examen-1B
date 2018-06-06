@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/boton_crear"
+        android:id="@+id/boton_refrescar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
@@ -31,9 +31,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/botonListar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/boton_crear"
+        app:layout_constraintEnd_toEndOf="@+id/boton_refrescar"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/boton_crear"
-        app:layout_constraintTop_toBottomOf="@+id/boton_crear"
+        app:layout_constraintStart_toStartOf="@+id/boton_refrescar"
+        app:layout_constraintTop_toBottomOf="@+id/boton_refrescar"
         app:layout_constraintVertical_bias="0.146" />
 </android.support.constraint.ConstraintLayout>

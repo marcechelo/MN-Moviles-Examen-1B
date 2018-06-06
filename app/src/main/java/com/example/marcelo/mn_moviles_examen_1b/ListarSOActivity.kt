@@ -62,6 +62,14 @@ class ListarSOActivity : AppCompatActivity() {
                 dialogo.show()
                 return true
             }
+            R.id.item_menu_compartir -> {
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.type = "text/html"
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Examen Moviles - SO y Aplicaciones")
+                intent.putExtra(Intent.EXTRA_TEXT,"Datos del Sistema Operativo - ${sistema}" )
+                startActivity(intent)
+                return true
+            }
             else -> {
                 return super.onOptionsItemSelected(item)
             }

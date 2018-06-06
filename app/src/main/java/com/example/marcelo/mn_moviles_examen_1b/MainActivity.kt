@@ -3,10 +3,8 @@ package com.example.marcelo.mn_moviles_examen_1b
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         boton_listar.setOnClickListener { view: View -> irAActividadListarSo() }
-        boton_crear.setOnClickListener { view: View -> irAActividadCrearSo() }
+        boton_refrescar.setOnClickListener { view: View -> irAActividadCrearSo() }
 
     }
 
