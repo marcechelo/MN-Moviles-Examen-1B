@@ -8,4 +8,5 @@
     <string name="menuCompartir">Share</string>
     <string name="menuEditar">Edit</string>
     <string name="menuBorrar">Save</string>
+    <string name="txtViewSo">Create OS</string>
 </resources>

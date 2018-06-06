@@ -5,8 +5,6 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class BaseDeDatosSo {
@@ -56,6 +54,24 @@ class DbHandlerSo(context:Context): SQLiteOpenHelper(context,BaseDeDatosSo.BDD_N
 
         dbWriteable.close()
 
+    }
+
+    fun updateSo(so: SO) {
+        val dbWriteable = writableDatabase
+        val cv = ContentValues()
+
+        cv.put(BaseDeDatosSo.BDD_TABLA_SO_CAMPO_NOMBRE, so.nombre)
+        cv.put(BaseDeDatosSo.BDD_TABLA_SO_CAMPO_VERSIONAPI, so.versionApi)
+        cv.put(BaseDeDatosSo.BDD_TABLA_SO_CAMPO_FECHALANZAMIENTO, so.fechaLanzamiento)
+        cv.put(BaseDeDatosSo.BDD_TABLA_SO_CAMPO_PESOENGIGAS, so.pesoEnGigas)
+        cv.put(BaseDeDatosSo.BDD_TABLA_SO_CAMPO_INSTALADO, so.instalado)
+
+        val whereClause = "${BaseDeDatosSo.BDD_TABLA_SO_CAMPO_ID} = ${so.id}"
+        val resultado = dbWriteable.update(BaseDeDatosSo.BDD_TABLA_SO_NOMBRE, cv, whereClause, null)
+
+        Log.i("database", "Si es -1 hubo error, sino exito: Respuesta: $resultado")
+
+        dbWriteable.close()
     }
 
     fun borrarSo(id: Int): Boolean {

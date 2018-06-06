@@ -10,7 +10,7 @@ class BaseDeDatosApp {
     companion object {
 
         val BDD_NOMBRE = "aplicacion"
-        val BDD_TABLA_APLICACION_NOMBRE =   "app"
+        val BDD_TABLA_APLICACION_NOMBRE = "tablaAplicacion"
         val BDD_TABLA_APLICACIO_CAMPO_ID = "idApp"
         val BDD_TABLA_APLICACIO_CAMPO_NOMBRE = "nombreApp"
         val BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS = "pesoEnGigasApp"
@@ -26,7 +26,7 @@ class DbHandlerApp(context: Context) : SQLiteOpenHelper(context, BaseDeDatosApp.
 
     override fun onCreate(db: SQLiteDatabase?) {
 
-        val createTableSQL = "CREATE TABLE ${BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE} (${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_ID} INTEGER PRIMARY KEY, ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_NOMBRE} VARCHAR(50),${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS} DOUBLE,${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_VERSION} INTEGER, ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_URLDESCARGA} VARCHAR(100), ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_FECHALANZAMIENTO} VARCHAR(20),  ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_COSTO} DOUBLE, ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_SISTEMAOPERATIVOID} INTEGER)"
+        val createTableSQL = "CREATE TABLE ${BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE} (${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_ID} INTEGER PRIMARY KEY, ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_NOMBRE} VARCHAR(50), ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS} DOUBLE, ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_VERSION} INTEGER, ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_URLDESCARGA} VARCHAR(100), ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_FECHALANZAMIENTO} VARCHAR(20),  ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_COSTO} DOUBLE, ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_SISTEMAOPERATIVOID} INTEGER)"
         db?.execSQL(createTableSQL)
     }
 
@@ -74,7 +74,7 @@ class DbHandlerApp(context: Context) : SQLiteOpenHelper(context, BaseDeDatosApp.
         dbWriteable.close()
     }
 
-    fun borrarLibro(id: Int): Boolean {
+    fun borrarApp(id: Int): Boolean {
         val dbWriteable = writableDatabase
         val whereClause = "${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_ID} = $id"
         return dbWriteable.delete(BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE, whereClause, null) > 0
@@ -83,7 +83,7 @@ class DbHandlerApp(context: Context) : SQLiteOpenHelper(context, BaseDeDatosApp.
     fun leerApp(idSo: Int): ArrayList<App> {
         var lista = ArrayList<App>()
         val dbReadable = readableDatabase
-        val query = "SELECT * FROM ${BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE}"
+        val query = "SELECT * FROM ${BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE} WHERE ${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_SISTEMAOPERATIVOID} = ${idSo}"
         val resultado = dbReadable.rawQuery(query, null)
 
         if (resultado.moveToFirst()) {

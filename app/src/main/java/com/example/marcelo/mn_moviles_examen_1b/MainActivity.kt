@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     fun irAActividadCrearSo(){
         val intent = Intent(this,CrearSoActivity::class.java)
+        intent.putExtra("tipo", "Create")
         startActivity(intent)
     }
 }

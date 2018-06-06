@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.ContextCompat.startActivity
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -37,38 +38,38 @@ class ListarSOActivity : AppCompatActivity() {
 
     }
 
-    override fun onContextItemSelected(item: MenuItem?):Boolean {
+    override fun onContextItemSelected(item: MenuItem):Boolean {
 
         var posicion = adaptador.getPosition()
         var sistema = sistemOp[posicion]
 
-
-    }
-}
-
-class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerView.Adapter<SistemaOperativoAdaptador.MyViewHolder>(),
-        PopupMenu.OnMenuItemClickListener{
-
-    override fun onMenuItemClick(item: MenuItem): Boolean {
-        when (item.getItemId()) {
+        when (item.itemId){
             R.id.item_menu_editar -> {
-                Log.i("menu", "Editar")
+                val intent = Intent(this, CrearSoActivity::class.java)
+                intent.putExtra("tipo","Edit")
+                intent.putExtra("so",sistema)
+                startActivity(intent)
                 return true
             }
-            R.id.item_menu_eliminar -> {
-                Log.i("menu", "Eliminar")
-                return true
-            }
-            R.id.item_menu_correo -> {
-                Log.i("menu", "Correo")
+            R.id.item_menu_borrar -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Desea eliminar el SO").setPositiveButton("Si",{
+                    dialog, which -> dbHandler.borrarSo(sistema.id)
+                    finish()
+                    startActivity(intent)
+                }).setNegativeButton("No",null)
+                val dialogo = builder.create()
+                dialogo.show()
                 return true
             }
             else -> {
-                Log.i("menu", "Todos los demas")
-                return false
+                return super.onOptionsItemSelected(item)
             }
         }
     }
+}
+
+class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerView.Adapter<SistemaOperativoAdaptador.MyViewHolder>(){
 
     private var position: Int = 0
 
@@ -86,6 +87,7 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
         var versionApi: TextView
         var pesoEnGigas: TextView
         lateinit var sistema: SO
+        lateinit var app:App
         var botonDetalle: Button
         var layout: RelativeLayout
 
@@ -95,6 +97,7 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
             pesoEnGigas = view.findViewById(R.id.txtv_detalle2) as TextView
             botonDetalle = view.findViewById(R.id.boton_detalle) as Button
             layout = view.findViewById(R.id.relative_layout) as RelativeLayout
+            view.setOnCreateContextMenuListener(this)
 
             /*layout.setOnClickListener({v ->
                 val nombreActual = v.findViewById(R.id.txtv_nombre) as TextView
@@ -106,7 +109,7 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
         override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
             menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Editar")
             menu?.add(Menu.NONE, R.id.item_menu_borrar, Menu.NONE, "Borrar")
-            menu?.add(Menu.NONE, R.id.item_menu_compartir, Menu.NONE, "Editar")
+            menu?.add(Menu.NONE, R.id.item_menu_compartir, Menu.NONE, "Compartir")
         }
 
     }
@@ -122,22 +125,30 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
         holder.versionApi.text = "Version Api " + sistema.versionApi.toString()
         holder.pesoEnGigas.text = "Peso " + sistema.pesoEnGigas.toString() + " Gigas"
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
+        holder.sistema = sistema
 
         val sistemaIntent = SO(sistema.id,sistema.nombre, sistema.versionApi, sistema.fechaLanzamiento, sistema.pesoEnGigas,sistema.instalado)
 
-        holder.botonDetalle.setOnClickListener{v ->
+        holder.botonDetalle.setOnClickListener{v: View ->
             val intent = Intent(v.context,DetalleSOActivity::class.java)
             intent.putExtra("sistema",sistemaIntent)
-            startActivity(v.context, intent, null)
+            intent.putExtra("idso",sistema.id)
+            v.context.startActivity(intent)
         }
 
-        holder.layout.setOnClickListener{view ->
+        holder.itemView.setOnLongClickListener{
+            setPosition(holder.adapterPosition)
+            false}
+
+
+
+        /*holder.layout.setOnClickListener{view ->
             val popup = PopupMenu(view.context,view)
             popup.setOnMenuItemClickListener(this)
             val inflater = popup.menuInflater
             inflater.inflate(R.menu.pop_up_menu, popup.menu)
             popup.show()
-        }
+        }*/
 
 
     }
