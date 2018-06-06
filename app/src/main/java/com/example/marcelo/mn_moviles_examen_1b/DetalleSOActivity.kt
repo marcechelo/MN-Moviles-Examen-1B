@@ -25,8 +25,9 @@ import kotlin.collections.ArrayList
 class DetalleSOActivity : AppCompatActivity() {
 
     //var aplicaciones = ArrayList<Aplicacion>()
-    lateinit var aplicaciones: java.util.ArrayList<App>
+    lateinit var aplicaciones: ArrayList<App>
     lateinit var dbHandler: DbHandlerApp
+    var SisteOp: SO? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

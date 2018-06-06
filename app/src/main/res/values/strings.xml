@@ -5,4 +5,7 @@
     <string name="botonDetalle">Detalle</string>
     <string name="botonNuevo">Nuevo</string>
     <string name="botonGuardar">Guardar</string>
+    <string name="menuCompartir">Compartir</string>
+    <string name="menuEditar">Editar</string>
+    <string name="menuBorrar">Borrar</string>
 </resources>

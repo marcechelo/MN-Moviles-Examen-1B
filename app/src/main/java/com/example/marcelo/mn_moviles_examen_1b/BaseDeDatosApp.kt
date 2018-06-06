@@ -54,7 +54,33 @@ class DbHandlerApp(context: Context) : SQLiteOpenHelper(context, BaseDeDatosApp.
         dbWriteable.close()
     }
 
-    fun leerApp(): ArrayList<App> {
+    fun updateApp(app: App) {
+        val dbWriteable = writableDatabase
+        val cv = ContentValues()
+
+        cv.put(BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_NOMBRE, app.nombre)
+        cv.put(BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_PESOENGIGAS, app.pesoEnGigas)
+        cv.put(BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_VERSION, app.version)
+        cv.put(BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_URLDESCARGA, app.urlDescarga)
+        cv.put(BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_FECHALANZAMIENTO, app.fechaLanzamiento)
+        cv.put(BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_COSTO, app.costo)
+        cv.put(BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_SISTEMAOPERATIVOID, app.sistemaOperativoId)
+
+        val whereClause = "${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_ID} = ${app.appid}"
+        val resultado = dbWriteable.update(BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE, cv, whereClause, null)
+
+        Log.i("database", "Si es -1 hubo error, sino exito: Respuesta: $resultado")
+
+        dbWriteable.close()
+    }
+
+    fun borrarLibro(id: Int): Boolean {
+        val dbWriteable = writableDatabase
+        val whereClause = "${BaseDeDatosApp.BDD_TABLA_APLICACIO_CAMPO_ID} = $id"
+        return dbWriteable.delete(BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE, whereClause, null) > 0
+    }
+
+    fun leerApp(idSo: Int): ArrayList<App> {
         var lista = ArrayList<App>()
         val dbReadable = readableDatabase
         val query = "SELECT * FROM ${BaseDeDatosApp.BDD_TABLA_APLICACION_NOMBRE}"
@@ -72,7 +98,7 @@ class DbHandlerApp(context: Context) : SQLiteOpenHelper(context, BaseDeDatosApp.
                 val costo = resultado.getString(6).toDouble()
                 val sistema = resultado.getString(7).toInt()
 
-                lista.add(App(id, nombre, peso, version, url, fecha, costo, sistema))
+                lista.add(App(id,nombre, peso, version, url, fecha, costo, sistema))
             } while (resultado.moveToNext())
         }
 

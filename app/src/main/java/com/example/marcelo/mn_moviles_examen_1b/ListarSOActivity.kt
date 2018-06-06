@@ -9,10 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_listar_so.*
 import java.util.*
@@ -21,6 +18,7 @@ class ListarSOActivity : AppCompatActivity() {
 
     lateinit var sistemOp: ArrayList<SO>
     lateinit var dbHandler: DbHandlerSo
+    lateinit var adaptador: SistemaOperativoAdaptador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,40 +28,28 @@ class ListarSOActivity : AppCompatActivity() {
         sistemOp = dbHandler.leerSo()
         val layoutManager = LinearLayoutManager(this)
         //sistemOp = CrearSistemOperativo.sistemaOp
-        val adaptador = SistemaOperativoAdaptador(sistemOp)
+        adaptador = SistemaOperativoAdaptador(sistemOp)
         recycler_view.layoutManager = layoutManager
         recycler_view.itemAnimator = DefaultItemAnimator()
         recycler_view.adapter = adaptador
         adaptador.notifyDataSetChanged()
-
         registerForContextMenu(recycler_view)
+
+    }
+
+    override fun onContextItemSelected(item: MenuItem?):Boolean {
+
+        var posicion = adaptador.getPosition()
+        var sistema = sistemOp[posicion]
+
 
     }
 }
 
-
-class SistemaOperativo(var nombre:String,
-                       var versionApi:Int,
-                       var fechaLanzamaineto: String,
-                       var pesoEnGigas:Double,
-                       var instalado:Boolean){}
-
-/*class CrearSistemOperativo(){
-    companion object {
-
-        var sistemaOp: ArrayList<SO> = ArrayList()
-
-        init {
-            sistemaOp.add(SistemaOperativo("algo1",1, "",1.1,true))
-            sistemaOp.add(SistemaOperativo("algo2",2, "",1.2,false))
-        }
-    }
-}*/
-
 class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerView.Adapter<SistemaOperativoAdaptador.MyViewHolder>(),
         PopupMenu.OnMenuItemClickListener{
 
-        override fun onMenuItemClick(item: MenuItem): Boolean {
+    override fun onMenuItemClick(item: MenuItem): Boolean {
         when (item.getItemId()) {
             R.id.item_menu_editar -> {
                 Log.i("menu", "Editar")
@@ -84,7 +70,17 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
         }
     }
 
-    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    private var position: Int = 0
+
+    fun getPosition(): Int {
+        return position
+    }
+
+    fun setPosition(position: Int) {
+        this.position = position
+    }
+
+    inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnCreateContextMenuListener {
 
         var nombre: TextView
         var versionApi: TextView
@@ -105,6 +101,12 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
                 val toast = Toast.makeText(v.context, "algo", Toast.LENGTH_LONG)
                 toast.show()
             })*/
+        }
+
+        override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+            menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Editar")
+            menu?.add(Menu.NONE, R.id.item_menu_borrar, Menu.NONE, "Borrar")
+            menu?.add(Menu.NONE, R.id.item_menu_compartir, Menu.NONE, "Editar")
         }
 
     }

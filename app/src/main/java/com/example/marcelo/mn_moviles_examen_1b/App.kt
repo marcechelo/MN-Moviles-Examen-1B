@@ -3,7 +3,7 @@ package com.example.marcelo.mn_moviles_examen_1b
 import android.os.Parcel
 import android.os.Parcelable
 
-class App(var idApp: Int,
+class App(var appid: Int,
           var nombre: String,
           var pesoEnGigas: Double,
           var version: Int,
@@ -28,7 +28,7 @@ class App(var idApp: Int,
     }
 
     override fun writeToParcel(destino: Parcel?, p1: Int) {
-        destino?.writeInt(idApp)
+        destino?.writeInt(appid)
         destino?.writeString(nombre)
         destino?.writeDouble(pesoEnGigas)
         destino?.writeInt(version)
