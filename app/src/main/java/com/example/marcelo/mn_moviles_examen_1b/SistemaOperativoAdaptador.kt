@@ -66,11 +66,9 @@ class SistemaOperativoAdaptador(private val listaSistema: List<SO>): RecyclerVie
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
         holder.sistema = sistema
 
-        val sistemaIntent = SO(sistema.id,sistema.nombre, sistema.versionApi, sistema.fechaLanzamiento, sistema.pesoEnGigas,sistema.instalado)
-
         holder.botonDetalle.setOnClickListener{v: View ->
             val intent = Intent(v.context,DetalleSOActivity::class.java)
-            intent.putExtra("sistema",sistemaIntent)
+            intent.putExtra("sistema",sistema)
             intent.putExtra("idso",sistema.id)
             v.context.startActivity(intent)
         }
