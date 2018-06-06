@@ -13,7 +13,7 @@ class CrearAppActivity : AppCompatActivity() {
     var soId = 0
     var aplicacion: App? = null
     var tipo = false
-    lateinit var soIntent:SO
+    var soIntent: SO? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +99,7 @@ class CrearAppActivity : AppCompatActivity() {
 
     fun irAActividadDetalleSo(){
         var intent = Intent(this,DetalleSOActivity::class.java)
-        intent.putExtra("sistema",this.soIntent)
+        intent.putExtra("sistema",soIntent)
         startActivity(intent)
     }
 }

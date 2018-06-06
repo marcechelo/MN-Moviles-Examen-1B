@@ -17,10 +17,9 @@
     <Button
         android:id="@+id/boton_detalle"
         android:layout_width="wrap_content"
-        android:layout_height="74dp"
+        android:layout_height="83dp"
+        android:layout_alignBottom="@+id/txtv_detalle2"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txtv_nombre"
-        android:layout_marginTop="-3dp"
         android:text="@string/botonDetalle" />
 
     <TextView
@@ -39,17 +38,17 @@
 
     <TextView
         android:id="@+id/txtv_detalle1"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_alignParentStart="true"
-        android:background="#F8BBD0"
         android:layout_below="@+id/txtv_nombre"
+        android:background="#F8BBD0"
 
         android:gravity="center" />
 
     <TextView
         android:id="@+id/txtv_detalle2"
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="35dp"
         android:layout_below="@+id/txtv_detalle1"
         android:background="#FCE4EC"
