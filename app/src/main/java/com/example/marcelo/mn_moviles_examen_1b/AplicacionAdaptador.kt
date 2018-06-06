@@ -61,10 +61,9 @@ class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerVi
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
         holder.aplicacion = aplicacion
         holder.botonDetalle.setOnClickListener { view: View ->
-            irAActividadDetalleApp(view.context,aplicacion)
-            /*var intent = Intent(view.context, DetalleAppActivity::class.java)
+            var intent = Intent(view.context, DetalleAppActivity::class.java)
             intent.putExtra("app",aplicacion)
-            startActivity(view.context, intent, null)*/
+            startActivity(view.context, intent, null)
 
         }
 
@@ -79,12 +78,6 @@ class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerVi
             inflater.inflate(R.menu.pop_up_menu, popup.menu)
             popup.show()
         }*/
-    }
-
-    fun irAActividadDetalleApp(context: Context, aplicacion: App){
-        val intent = Intent(context, DetalleAppActivity::class.java)
-        intent.putExtra("app",aplicacion)
-        startActivity(context,intent,null)
     }
 
     override fun getItemCount(): Int {

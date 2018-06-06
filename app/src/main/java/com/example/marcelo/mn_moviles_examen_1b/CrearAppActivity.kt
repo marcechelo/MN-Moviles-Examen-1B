@@ -14,7 +14,6 @@ class CrearAppActivity : AppCompatActivity() {
     var aplicacion: App? = null
     var tipo = false
     var soIntent: SO? = null
-    lateinit var adaptador: AplicacionAdaptador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
