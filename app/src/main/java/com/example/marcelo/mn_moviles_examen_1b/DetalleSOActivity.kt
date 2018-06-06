@@ -49,7 +49,7 @@ class DetalleSOActivity : AppCompatActivity() {
         recycler_view_app.itemAnimator = DefaultItemAnimator()
         recycler_view_app.adapter = adaptador
         adaptador.notifyDataSetChanged()
-        //registerForContextMenu(recycler_view)
+        registerForContextMenu(recycler_view_app)
 
         boton_so_crear.setOnClickListener { view: View ->
             irAAtividadCrearApp()
@@ -70,13 +70,14 @@ class DetalleSOActivity : AppCompatActivity() {
         var aplicacion = aplicaciones[posicion]
 
         when(item.itemId){
-            R.id.item_menu_edit -> {
-                val intent = Intent(this,CrearAppActivity::class.java)
+            R.id.item_menu_editar-> {
+                val intent = Intent(this, CrearAppActivity::class.java)
                 intent.putExtra("tipo","Edit")
                 intent.putExtra("app",aplicacion)
                 intent.putExtra("sistema",SisteOp)
                 startActivity(intent)
                 return true
+                Log.i("error","intent ${intent}")
             }
             R.id.item_menu_borrar -> {
                 val builder = AlertDialog.Builder(this)
