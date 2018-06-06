@@ -9,7 +9,7 @@ import android.util.Log
 class BaseDeDatosApp {
     companion object {
 
-        val BDD_NOMBRE = "aplicacion"
+        val BDD_NOMBRE = "APP"
         val BDD_TABLA_APLICACION_NOMBRE = "tablaAplicacion"
         val BDD_TABLA_APLICACIO_CAMPO_ID = "idApp"
         val BDD_TABLA_APLICACIO_CAMPO_NOMBRE = "nombreApp"

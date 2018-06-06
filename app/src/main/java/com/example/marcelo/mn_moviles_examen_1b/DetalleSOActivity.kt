@@ -49,7 +49,7 @@ class DetalleSOActivity : AppCompatActivity() {
         recycler_view_app.itemAnimator = DefaultItemAnimator()
         recycler_view_app.adapter = adaptador
         adaptador.notifyDataSetChanged()
-        registerForContextMenu(recycler_view)
+        //registerForContextMenu(recycler_view)
 
         boton_so_crear.setOnClickListener { view: View ->
             irAAtividadCrearApp()
