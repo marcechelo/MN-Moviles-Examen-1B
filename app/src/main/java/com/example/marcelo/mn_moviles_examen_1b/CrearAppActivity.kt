@@ -98,7 +98,7 @@ class CrearAppActivity : AppCompatActivity() {
     }
 
     fun irAActividadDetalleSo(){
-        var intent = Intent(this,DetalleSOActivity::class.java)
+        var intent = Intent(this,ListarSOActivity::class.java)
         intent.putExtra("sistema",soIntent)
         startActivity(intent)
     }

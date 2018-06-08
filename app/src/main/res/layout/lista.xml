@@ -17,7 +17,7 @@
     <Button
         android:id="@+id/boton_detalle"
         android:layout_width="wrap_content"
-        android:layout_height="83dp"
+        android:layout_height="70dp"
         android:layout_alignBottom="@+id/txtv_detalle2"
         android:layout_alignParentEnd="true"
         android:text="@string/botonDetalle" />
