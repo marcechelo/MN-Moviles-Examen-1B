@@ -52,35 +52,35 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
 
-                android:text="Nombre" />
+                android:text="@string/labelNombre" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView3"
-                android:text="Version Api" />
+                android:text="@string/labelApi" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView4"
-                android:text="Fecha Lanzamiento" />
+                android:text="@string/labelfechaLanzamiento" />
 
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView5"
-                android:text="Peso En Gigas" />
+                android:text="@string/labelpeso" />
 
             <TextView
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView6"
-                android:text="Instalado" />
+                android:text="@string/labelinstalado" />
 
         </RelativeLayout>
 

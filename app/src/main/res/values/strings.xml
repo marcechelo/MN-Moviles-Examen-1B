@@ -9,4 +9,15 @@
     <string name="menuEditar">Editar</string>
     <string name="menuBorrar">Borrar</string>
     <string name="txtViewSo">Crear SO</string>
+    <string name="labelNombre">Nombre</string>
+    <string name="labelApi">Version API</string>
+    <string name="labelfechaLanzamiento">Fecha Lanzaimiento</string>
+    <string name="labelpeso">Peso (Gigas)</string>
+    <string name="labelinstalado">Instalado</string>
+    <string name="labeldetalleApp">Detalle Aplicacion</string>
+    <string name="labelVersion">Version</string>
+    <string name="labelUrl">Url Descarga</string>
+    <string name="labelCosto">Costo</string>
+    <string name="labelSoId">Sistema Operativo Id</string>
+    <string name="labelCrearApp">Crear Aplicacion</string>
 </resources>
