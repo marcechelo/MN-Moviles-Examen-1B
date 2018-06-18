@@ -9,7 +9,29 @@ module.exports = {
 
   attributes: {
 
+    id:{
+      type: "number"
+    },
+    nombre:{
+      type: "string"
+    },
+    versionApi:{
+      type: "number"
+    },
+    fechaLanzamiento:{
+      type: "string"
+    },
+    pesoGigas:{
+      type: "number"
+    },
+    instalado:{
+      type: "boolean"
+    },
 
+    aplicaciones:{
+      collection:"Aplicaciones",
+      via:"sistemaOperativoId"
+    }
 
   },
 

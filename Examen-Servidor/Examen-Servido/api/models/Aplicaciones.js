@@ -9,7 +9,31 @@ module.exports = {
 
   attributes: {
 
-    
+    id:{
+      type: "number"
+    },
+    nombre:{
+      type: "string"
+    },
+    pesoGigas:{
+      type: "number"
+    },
+    version:{
+      type: "number"
+    },
+    url:{
+      type: "string"
+    },
+    fechaLanzamiento:{
+      type: "string"
+    },
+    costo:{
+      type: "number"
+    },
+    sistemaOperativoId:{
+      model:"SistemaOperativo"
+    },
+
 
   },
 
