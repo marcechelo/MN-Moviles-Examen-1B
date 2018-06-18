@@ -9,10 +9,12 @@ module.exports = {
 
   attributes: {
 
-    id:{
+    idSO:{
+      require,
+      autoIncrement,
       type: "number"
     },
-    nombre:{
+    nombreSO:{
       type: "string"
     },
     versionApi:{

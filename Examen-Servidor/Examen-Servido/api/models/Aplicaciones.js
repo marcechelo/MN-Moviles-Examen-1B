@@ -9,10 +9,12 @@ module.exports = {
 
   attributes: {
 
-    id:{
+    idApp:{
+      require,
+      autoIncrement,
       type: "number"
     },
-    nombre:{
+    nombreApp:{
       type: "string"
     },
     pesoGigas:{
