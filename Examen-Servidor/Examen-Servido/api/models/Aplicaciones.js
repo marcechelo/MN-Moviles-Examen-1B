@@ -8,35 +8,16 @@
 module.exports = {
 
   attributes: {
-
-    idApp:{
-      require,
-      autoIncrement,
-      type: "number"
-    },
-    nombreApp:{
-      type: "string"
-    },
-    pesoGigas:{
-      type: "number"
-    },
-    version:{
-      type: "number"
-    },
-    url:{
-      type: "string"
-    },
-    fechaLanzamiento:{
-      type: "string"
-    },
-    costo:{
-      type: "number"
-    },
-    sistemaOperativoId:{
+    isApp: {type:"number"},
+    nombreApp: {type:"string"},
+    pesoGigasApp: {type:"number"},
+    version: {type:"number"},
+    urlApp: {type:"string"},
+    fechaLanzamientoApp: {type:"string"},
+    costo: {type:"number"},
+    sistemaOperativoId: {
       model:"SistemaOperativo"
-    },
-
-
+    }
   },
 
 };

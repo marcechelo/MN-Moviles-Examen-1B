@@ -8,33 +8,16 @@
 module.exports = {
 
   attributes: {
-
-    idSO:{
-      require,
-      autoIncrement,
-      type: "number"
-    },
-    nombreSO:{
-      type: "string"
-    },
-    versionApi:{
-      type: "number"
-    },
-    fechaLanzamiento:{
-      type: "string"
-    },
-    pesoGigas:{
-      type: "number"
-    },
-    instalado:{
-      type: "boolean"
-    },
-
+    idSo:{type: "number"},
+    nombreSo:{type: "string"},
+    versionApi:{type: "number"},
+    fechaLanzamiento:{type: "string"},
+    pesoGigasSo:{type: "number"},
+    instalado:{type: "boolean"},
     aplicaciones:{
       collection:"Aplicaciones",
       via:"sistemaOperativoId"
     }
-
   },
 
 };
