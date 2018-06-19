@@ -8,7 +8,10 @@
 module.exports = {
 
   attributes: {
-    isApp: {type:"number"},
+    idApp: {
+      type:"number",
+      autoIncrement: true
+    },
     nombreApp: {type:"string"},
     pesoGigasApp: {type:"number"},
     version: {type:"number"},
