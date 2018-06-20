@@ -72,14 +72,8 @@ class CrearSoActivity : AppCompatActivity() {
                                 }
                                 "{\"nombreSo\" : $nombre, \"versionApi\" : $version, \"fechaLanzamiento\" :$fecha, \"pesoGigasSo\" :$peso, \"instalado\": $instaldo}"
                             }*/
-                    val json: JsonObject = jsonObject("nombreSo" to "$nombre", )
-                    json.put("nombreSo", nombre)
-                    json.put("versionApi", version)
-                    json.put("fechaLanzamiento", fecha)
-                    json.put("pesoGigasSo", peso)
-                    json.put("instalado", instaldo)
 
-                    Fuel.post("http://localhost:1337/SistemaOperativo").body(json.toString()).response{request, response, result ->
+                    Fuel.post("http://localhost:1337/SistemaOperativo").body("{\"nombreSo\":\"$nombre\", \"versionApi\" : $version, \"fechaLanzamiento\" :\"$fecha\", \"pesoGigasSo\" :$peso, \"instalado\": $instaldo}").response{request, response, result ->
                         when(result){
                             is com.github.kittinunf.result.Result.Failure -> {
                                 val ex = result.getException()
