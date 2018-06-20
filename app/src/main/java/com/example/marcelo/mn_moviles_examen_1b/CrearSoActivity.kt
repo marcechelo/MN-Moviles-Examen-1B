@@ -3,11 +3,17 @@ package com.example.marcelo.mn_moviles_examen_1b
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import com.beust.klaxon.JsonObject
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.response
 import kotlinx.android.synthetic.main.activity_crear_app.*
 import kotlinx.android.synthetic.main.activity_crear_so.*
+import org.json.JSONObject
 import java.util.*
+import javax.xml.transform.Result
 
 class CrearSoActivity : AppCompatActivity() {
 
@@ -42,6 +48,7 @@ class CrearSoActivity : AppCompatActivity() {
                     val toast = Toast.makeText(this,"Todos los campos deben estra lleno",Toast.LENGTH_SHORT)
                     toast.show()
                 }else{
+
                     var nombre = edit_nombre.text.toString()
                     var version = edit_version_api.text.toString().toInt()
                     var fecha = edit_fecha.text.toString()
@@ -49,7 +56,41 @@ class CrearSoActivity : AppCompatActivity() {
                     var instaldo = if (cb_instalado.isChecked) 1 else 0
                     var so = SO(0, nombre, version, fecha, peso, instaldo)
 
-                    dbHandler.insertarSo(so)
+/*                    val jsonPayload = """
+                    {"nombreSo": ${nombre}, "versionApi": ${version},"fechaLanzamiento": ${fecha}, "pesoGigasSo": ${peso}, "instalado": ${instaldo} }
+                    """
+                    Fuel.post("http://localhost:1337/SistemaOperativo").body(jsonPayload, Charsets.UTF_8).
+                            header("Content-Type" to "application/json").
+                            response { request, response, result ->
+                                when (result) {
+                                    is com.github.kittinunf.result.Result.Failure -> {
+                                        val ex = result.getException()
+                                    }
+                                    is com.github.kittinunf.result.Result.Success -> {
+                                        Log.i("mensaje", "Correcto")
+                                    }
+                                }
+                                "{\"nombreSo\" : $nombre, \"versionApi\" : $version, \"fechaLanzamiento\" :$fecha, \"pesoGigasSo\" :$peso, \"instalado\": $instaldo}"
+                            }*/
+                    val json: JsonObject = jsonObject("nombreSo" to "$nombre", )
+                    json.put("nombreSo", nombre)
+                    json.put("versionApi", version)
+                    json.put("fechaLanzamiento", fecha)
+                    json.put("pesoGigasSo", peso)
+                    json.put("instalado", instaldo)
+
+                    Fuel.post("http://localhost:1337/SistemaOperativo").body(json.toString()).response{request, response, result ->
+                        when(result){
+                            is com.github.kittinunf.result.Result.Failure -> {
+                                val ex = result.getException()
+                            }
+                            is com.github.kittinunf.result.Result.Success ->{
+                                Log.i("SO","correcto");
+                            }
+                        }
+                    }
+
+                    //dbHandler.insertarSo(so)
                     irAActividadListarOs()
                 }
 

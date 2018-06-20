@@ -10,13 +10,14 @@ module.exports = {
   attributes: {
     idSo:{
       type: "number",
-      autoIncrement: true
+      autoIncrement: true,
+      required: false
     },
     nombreSo:{type: "string"},
     versionApi:{type: "number"},
     fechaLanzamiento:{type: "string"},
     pesoGigasSo:{type: "number"},
-    instalado:{type: "boolean"},
+    instalado:{type: "number"},
     aplicaciones:{
       collection:"Aplicaciones",
       via:"sistemaOperativoId"
