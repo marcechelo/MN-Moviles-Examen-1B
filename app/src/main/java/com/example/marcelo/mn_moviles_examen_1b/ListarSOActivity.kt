@@ -33,8 +33,7 @@ class ListarSOActivity : AppCompatActivity() {
         setContentView(R.layout.activity_listar_so)
 
         dbHandler = DbHandlerSo(this)
-        //sistemOp = dbHandler.leerSo()
-        sistemOp = parse(listarOs())
+        sistemOp = dbHandler.leerSo()
         val layoutManager = LinearLayoutManager(this)
         //sistemOp = CrearSistemOperativo.sistemaOp
         adaptador = SistemaOperativoAdaptador(sistemOp)
@@ -44,70 +43,6 @@ class ListarSOActivity : AppCompatActivity() {
         adaptador.notifyDataSetChanged()
         registerForContextMenu(recycler_view)
 
-    }
-
-    fun parse(jsonStringEntrenador:String): ArrayList<SO>{
-        val result = ArrayList<SO>()
-        com.beust.klaxon.JsonReader(StringReader(jsonStringEntrenador)).use { reader ->
-
-            reader.beginArray {
-                while (reader.hasNext()){
-                    val sistema = Klaxon().parse<SistemaOperativo>(jsonStringEntrenador)
-                    val id = sistema!!.id
-                    val nombre = sistema.nombreSo
-                    val version = sistema.versionApi
-                    val fecha = sistema.fechaLanzamiento
-                    val peso = sistema.pesoGigasSo
-                    val instaldo = sistema.instalado
-                    result.add(SO(id,nombre,version,fecha,peso,instaldo))
-
-                }
-            }
-        }
-        return result
-    }
-
-    fun listarOs ():String{
-
-        var resultado =""
-        "http://192.168.1.3:1337/SistemaOperativo/1".httpGet().responseString { request, response, result ->
-            resultado= result.get()
-            when (result) {
-                is Result.Failure -> {
-                    val ex = result.getException()
-                    Log.i("http-ejemplo", "Error ${ex.response}")
-                }
-                is Result.Success -> {
-                    val jsonStringEntrenador = result.get()
-                    Log.i("http-ejemplo", "Exito ${jsonStringEntrenador}")
-                    //resultado = jsonStringEntrenador
-                    val sistemaOperativo: SistemaOperativo? = Klaxon().parse<SistemaOperativo>(jsonStringEntrenador)
-
-                        if (sistemaOperativo != null) {
-                        Log.i("http-ejemplo", "Nombre: ${sistemaOperativo.nombreSo}")
-                        Log.i("http-ejemplo", "API: ${sistemaOperativo.versionApi}")
-                        Log.i("http-ejemplo", "fecha: ${sistemaOperativo.fechaLanzamiento}")
-                        Log.i("http-ejemplo", "peso: ${sistemaOperativo.pesoGigasSo}")
-                        Log.i("http-ejemplo", "instalado: ${sistemaOperativo.instalado}")
-                        Log.i("http-ejemplo", "Id: ${sistemaOperativo.id}")
-                        Log.i("http-ejemplo", "Creado: ${sistemaOperativo.createdAtDate}")
-                        Log.i("http-ejemplo", "Actualizado: ${sistemaOperativo.updatedAtDate}")
-
-                        /*sistemaOperativo.pokemons.forEach { pokemon: Pokemon ->
-                            Log.i("http-ejemplo", "Nombre ${pokemon.nombre}")
-                            Log.i("http-ejemplo", "Tipo ${pokemon.tipo}")
-                            Log.i("http-ejemplo", "Numero ${pokemon.numero}")
-                        }*/
-
-                    } else {
-                        Log.i("http-ejemplo", "Entrenador nulo")
-                    }
-
-
-                }
-            }
-        }
-        return resultado
     }
 
     override fun onContextItemSelected(item: MenuItem):Boolean {
