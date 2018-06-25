@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.system.Os
 import android.util.JsonReader
 import android.util.Log
 import android.view.*
@@ -33,7 +34,7 @@ class ListarSOActivity : AppCompatActivity() {
 
         dbHandler = DbHandlerSo(this)
         //sistemOp = dbHandler.leerSo()
-        sistemOp = streamingArray(listarOs())
+        sistemOp = parse(listarOs())
         val layoutManager = LinearLayoutManager(this)
         //sistemOp = CrearSistemOperativo.sistemaOp
         adaptador = SistemaOperativoAdaptador(sistemOp)
@@ -45,20 +46,21 @@ class ListarSOActivity : AppCompatActivity() {
 
     }
 
-    fun streamingArray(jsonStringEntrenador: String):ArrayList<SO> {
-        val klaxon = Klaxon()
-        val result = arrayListOf<SO>()
-        JsonReader(StringReader(jsonStringEntrenador)).use { reader ->
+    fun parse(jsonStringEntrenador:String): ArrayList<SO>{
+        val result = ArrayList<SO>()
+        com.beust.klaxon.JsonReader(StringReader(jsonStringEntrenador)).use { reader ->
+
             reader.beginArray {
-                while (reader.hasNext()) {
-                    val sistemaOperativo: SistemaOperativo? = Klaxon().parse<SistemaOperativo>(jsonStringEntrenador)
-                    val id = sistemaOperativo!!.id
-                    val nombre = sistemaOperativo.nombreSo
-                    val version = sistemaOperativo.versionApi
-                    val fecha = sistemaOperativo.fechaLanzamiento
-                    val peso = sistemaOperativo.pesoGigasSo
-                    val instaldo = sistemaOperativo.instalado
+                while (reader.hasNext()){
+                    val sistema = Klaxon().parse<SistemaOperativo>(jsonStringEntrenador)
+                    val id = sistema!!.id
+                    val nombre = sistema.nombreSo
+                    val version = sistema.versionApi
+                    val fecha = sistema.fechaLanzamiento
+                    val peso = sistema.pesoGigasSo
+                    val instaldo = sistema.instalado
                     result.add(SO(id,nombre,version,fecha,peso,instaldo))
+
                 }
             }
         }
@@ -67,8 +69,9 @@ class ListarSOActivity : AppCompatActivity() {
 
     fun listarOs ():String{
 
-        var resulatdo = ""
+        var resultado =""
         "http://192.168.1.3:1337/SistemaOperativo/1".httpGet().responseString { request, response, result ->
+            resultado= result.get()
             when (result) {
                 is Result.Failure -> {
                     val ex = result.getException()
@@ -77,7 +80,7 @@ class ListarSOActivity : AppCompatActivity() {
                 is Result.Success -> {
                     val jsonStringEntrenador = result.get()
                     Log.i("http-ejemplo", "Exito ${jsonStringEntrenador}")
-                    resulatdo = jsonStringEntrenador
+                    //resultado = jsonStringEntrenador
                     val sistemaOperativo: SistemaOperativo? = Klaxon().parse<SistemaOperativo>(jsonStringEntrenador)
 
                         if (sistemaOperativo != null) {
@@ -104,8 +107,7 @@ class ListarSOActivity : AppCompatActivity() {
                 }
             }
         }
-
-        return resulatdo
+        return resultado
     }
 
     override fun onContextItemSelected(item: MenuItem):Boolean {
@@ -147,13 +149,7 @@ class ListarSOActivity : AppCompatActivity() {
     }
 }
 
-private fun <T> Klaxon.parse(reader: JsonReader) {
 
-}
-
-private fun JsonReader.beginArray(function: () -> Unit) {
-
-}
 
 
 
