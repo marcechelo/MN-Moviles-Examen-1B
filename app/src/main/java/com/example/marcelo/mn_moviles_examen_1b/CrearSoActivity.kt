@@ -55,36 +55,9 @@ class CrearSoActivity : AppCompatActivity() {
                     var peso = edit_peso.text.toString().toDouble()
                     var instaldo = if (cb_instalado.isChecked) 1 else 0
                     var so = SO(0, nombre, version, fecha, peso, instaldo)
-
-/*                    val jsonPayload = """
-                    {"nombreSo": ${nombre}, "versionApi": ${version},"fechaLanzamiento": ${fecha}, "pesoGigasSo": ${peso}, "instalado": ${instaldo} }
-                    """
-                    Fuel.post("http://localhost:1337/SistemaOperativo").body(jsonPayload, Charsets.UTF_8).
-                            header("Content-Type" to "application/json").
-                            response { request, response, result ->
-                                when (result) {
-                                    is com.github.kittinunf.result.Result.Failure -> {
-                                        val ex = result.getException()
-                                    }
-                                    is com.github.kittinunf.result.Result.Success -> {
-                                        Log.i("mensaje", "Correcto")
-                                    }
-                                }
-                                "{\"nombreSo\" : $nombre, \"versionApi\" : $version, \"fechaLanzamiento\" :$fecha, \"pesoGigasSo\" :$peso, \"instalado\": $instaldo}"
-                            }*/
-
-                    Fuel.post("http://localhost:1337/SistemaOperativo").body("{\"nombreSo\":\"$nombre\", \"versionApi\" : $version, \"fechaLanzamiento\" :\"$fecha\", \"pesoGigasSo\" :$peso, \"instalado\": $instaldo}").response{request, response, result ->
-                        when(result){
-                            is com.github.kittinunf.result.Result.Failure -> {
-                                val ex = result.getException()
-                            }
-                            is com.github.kittinunf.result.Result.Success ->{
-                                Log.i("SO","correcto");
-                            }
-                        }
-                    }
-
                     //dbHandler.insertarSo(so)
+                    postSo(nombre,version,fecha,peso,instaldo)
+
                     irAActividadListarOs()
                 }
 
@@ -110,6 +83,26 @@ class CrearSoActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    fun postSo(nombre:String,version: Int, fecha:String, peso:Double, instalado:Int){
+
+        val json = JSONObject()
+        json.put("nombreSo", nombre)
+        json.put("versionApi", version)
+        json.put("fechaLanzamiento", fecha)
+        json.put("pesoGigasSo", peso)
+        json.put("instalado", instalado)
+
+        val httpRequest = Fuel.post("http://192.168.1.3:1337/SistemaOperativo").body(json.toString())
+
+        httpRequest.headers["Content-Type"] = "application/json"
+
+        httpRequest.response { request, response, result ->
+            Log.i("mensaje",request.toString())
+            Log.i("mensaje",response.toString())
+            Log.i("mensaje",result.toString())
         }
     }
 
