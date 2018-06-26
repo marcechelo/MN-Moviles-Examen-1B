@@ -9,8 +9,8 @@ import kotlinx.android.synthetic.main.activity_crear_app.*
 
 class CrearAppActivity : AppCompatActivity() {
 
-    lateinit var dbHnadler: DbHandlerApp
     var soId = 0
+    var appId = 0
     var aplicacion: App? = null
     var tipo = false
     var soIntent: SO? = null
@@ -30,11 +30,10 @@ class CrearAppActivity : AppCompatActivity() {
             tipo = true
         }else {soId = intent.getIntExtra("sistemaId",0)}
 
-
-        dbHnadler = DbHandlerApp(this)
-
-
         boton_guardar_app.setOnClickListener { view: View ->
+
+            val latitud = -0.188193
+            val longitud = -78.472590
 
             if (!tipo){
 
@@ -55,8 +54,8 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(0,nombre,peso,version,url,fecha,costo,soId)
-                    dbHnadler.insertarApp(app)
+                    var app = App(0,nombre,peso,version,url,fecha,costo,soId,0,0)
+                    BaseDeDatosApp.postAplicacion(app)
                     irAActividadDetalleSo()
                 }
 
@@ -79,8 +78,8 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(aplicacion?.appid!!,nombre,peso,version,url,fecha,costo,soId)
-                    dbHnadler.updateApp(app)
+                    var app = App(aplicacion?.appid!!,nombre,peso,version,url,fecha,costo,soId,0,0)
+                    BaseDeDatosApp.putAplicacion(app)
                     irAActividadDetalleSo()
                 }
 

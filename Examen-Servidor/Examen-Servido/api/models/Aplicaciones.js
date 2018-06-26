@@ -8,16 +8,14 @@
 module.exports = {
 
   attributes: {
-    idApp: {
-      type:"number",
-      autoIncrement: true
-    },
     nombreApp: {type:"string"},
     pesoGigasApp: {type:"number"},
     version: {type:"number"},
     urlApp: {type:"string"},
     fechaLanzamientoApp: {type:"string"},
     costo: {type:"number"},
+    /*latitud: {type:"number"},
+    longitud: {type:"number"},*/
     sistemaOperativoId: {
       model:"SistemaOperativo"
     }

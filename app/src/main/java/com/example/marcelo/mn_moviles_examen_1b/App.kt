@@ -10,7 +10,11 @@ class App(var appid: Int,
           var urlDescarga: String,
           var fechaLanzamiento: String,
           var costo: Double,
-          var sistemaOperativoId: Int) : Parcelable {
+          //var latitud: Double,
+          //var longitud: Double,
+          var sistemaOperativoId: Int,
+          var createdAt: Long,
+          var updatedAt: Long) : Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -20,7 +24,11 @@ class App(var appid: Int,
             parcel.readString(),
             parcel.readString(),
             parcel.readDouble(),
-            parcel.readInt()) {
+            //parcel.readDouble(),
+            //parcel.readDouble(),
+            parcel.readInt(),
+            parcel.readLong(),
+            parcel.readLong()) {
     }
 
     override fun describeContents(): Int {
@@ -35,7 +43,11 @@ class App(var appid: Int,
         destino?.writeString(urlDescarga)
         destino?.writeString(fechaLanzamiento)
         destino?.writeDouble(costo)
+        //destino?.writeDouble(latitud)
+        //destino?.writeDouble(longitud)
         destino?.writeInt(sistemaOperativoId)
+        destino?.writeLong(createdAt)
+        destino?.writeLong(updatedAt)
     }
 
     companion object CREATOR : Parcelable.Creator<App> {

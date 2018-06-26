@@ -9,7 +9,9 @@ class SO(var id: Int,
          var versionApi: Int,
          var fechaLanzamiento: String,
          var pesoEnGigas: Double,
-         var instalado: Int): Parcelable {
+         var instalado: Int,
+         var createdAt: Long,
+         var updatedAt: Long): Parcelable {
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
@@ -17,7 +19,9 @@ class SO(var id: Int,
             parcel.readInt(),
             parcel.readString(),
             parcel.readDouble(),
-            parcel.readInt()) {
+            parcel.readInt(),
+            parcel.readLong(),
+            parcel.readLong()) {
     }
 
     override fun describeContents(): Int {
@@ -31,6 +35,8 @@ class SO(var id: Int,
         destino?.writeString(fechaLanzamiento)
         destino?.writeDouble(pesoEnGigas)
         destino?.writeInt(instalado)
+        destino?.writeLong(createdAt)
+        destino?.writeLong(updatedAt)
     }
 
     companion object CREATOR : Parcelable.Creator<SO> {

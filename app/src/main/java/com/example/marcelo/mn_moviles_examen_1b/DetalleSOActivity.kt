@@ -22,7 +22,6 @@ class DetalleSOActivity : AppCompatActivity() {
     var SisteOp: SO? = null
     lateinit var adaptador: AplicacionAdaptador
     lateinit var aplicaciones: ArrayList<App>
-    lateinit var dbHandler: DbHandlerApp
 
     var idSo = 0
 
@@ -39,9 +38,9 @@ class DetalleSOActivity : AppCompatActivity() {
         txtv_peso_so.text = SisteOp?.pesoEnGigas.toString()
         txtv_instaldo_so.text = if (SisteOp?.instalado == 1) "Si" else "No"
 
-        dbHandler = DbHandlerApp(this)
         idSo = intent.getIntExtra("idso",0)
-        aplicaciones = dbHandler.leerApp(idSo)
+        aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
+        //aplicaciones = dbHandler.leerApp(idSo)
 
         val layoutManager = LinearLayoutManager(this)
         adaptador = AplicacionAdaptador(aplicaciones)
@@ -86,7 +85,7 @@ class DetalleSOActivity : AppCompatActivity() {
             R.id.item_menu_borrar -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("Desea eliminar la Aplicacion").setPositiveButton("Si",{
-                    dialog, which -> dbHandler.borrarApp(aplicacion.appid)
+                    dialog, which -> BaseDeDatosApp.deleteAplicacion(aplicacion.appid)
                     finish()
                     startActivity(intent)
                 }).setNegativeButton("No",null)

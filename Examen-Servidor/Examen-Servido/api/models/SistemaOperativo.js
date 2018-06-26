@@ -8,11 +8,6 @@
 module.exports = {
 
   attributes: {
-    idSo:{
-      type: "number",
-      autoIncrement: true,
-      required: false
-    },
     nombreSo:{type: "string"},
     versionApi:{type: "number"},
     fechaLanzamiento:{type: "string"},

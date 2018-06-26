@@ -3,21 +3,12 @@ package com.example.marcelo.mn_moviles_examen_1b
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.beust.klaxon.JsonObject
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.response
-import kotlinx.android.synthetic.main.activity_crear_app.*
 import kotlinx.android.synthetic.main.activity_crear_so.*
-import org.json.JSONObject
-import java.util.*
-import javax.xml.transform.Result
 
 class CrearSoActivity : AppCompatActivity() {
 
-    lateinit var dbHandler: DbHandlerSo
     var sistemaOp: SO? = null
     var tipo = false
 
@@ -34,7 +25,6 @@ class CrearSoActivity : AppCompatActivity() {
             tipo = true
         }
 
-        dbHandler = DbHandlerSo(this)
 
         boton_guardar.setOnClickListener{view: View? ->
 
@@ -54,8 +44,8 @@ class CrearSoActivity : AppCompatActivity() {
                     var fecha = edit_fecha.text.toString()
                     var peso = edit_peso.text.toString().toDouble()
                     var instaldo = if (cb_instalado.isChecked) 1 else 0
-                    var so = SO(0, nombre, version, fecha, peso, instaldo)
-                    dbHandler.insertarSo(so)
+                    var so = SO(0, nombre, version, fecha, peso, instaldo,0,0)
+                    BaseDeDatosSo.postSistemaOperativo(so)
 
                     irAActividadListarOs()
                 }
@@ -75,9 +65,8 @@ class CrearSoActivity : AppCompatActivity() {
                     var fecha = edit_fecha.text.toString()
                     var peso = edit_peso.text.toString().toDouble()
                     var instaldo = if (cb_instalado.isChecked) 1 else 0
-                    var so = SO(sistemaOp?.id!!, nombre, version, fecha, peso, instaldo)
-
-                    dbHandler.updateSo(so)
+                    var so = SO(sistemaOp?.id!!, nombre, version, fecha, peso, instaldo,0,0)
+                    BaseDeDatosSo.putSistemaOperativo(so)
                     irAActividadListarOs()
                 }
 

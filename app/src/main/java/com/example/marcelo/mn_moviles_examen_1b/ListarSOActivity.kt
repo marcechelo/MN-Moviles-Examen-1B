@@ -25,15 +25,14 @@ import kotlin.collections.ArrayList
 class ListarSOActivity : AppCompatActivity() {
 
     lateinit var sistemOp: ArrayList<SO>
-    lateinit var dbHandler: DbHandlerSo
     lateinit var adaptador: SistemaOperativoAdaptador
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listar_so)
 
-        dbHandler = DbHandlerSo(this)
-        sistemOp = dbHandler.leerSo()
+        sistemOp = BaseDeDatosSo.getList()
+
         val layoutManager = LinearLayoutManager(this)
         //sistemOp = CrearSistemOperativo.sistemaOp
         adaptador = SistemaOperativoAdaptador(sistemOp)
@@ -61,7 +60,7 @@ class ListarSOActivity : AppCompatActivity() {
             R.id.item_menu_borrar -> {
                 val builder = AlertDialog.Builder(this)
                 builder.setMessage("Desea eliminar el SO").setPositiveButton("Si",{
-                    dialog, which -> dbHandler.borrarSo(sistema.id)
+                    dialog, which -> BaseDeDatosSo.deleteSistemaOperativo(sistema.id)
                     finish()
                     startActivity(intent)
                 }).setNegativeButton("No",null)
