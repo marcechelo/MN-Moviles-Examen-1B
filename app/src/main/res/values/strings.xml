@@ -20,4 +20,6 @@
     <string name="labelCosto">Costo</string>
     <string name="labelSoId">Sistema Operativo Id</string>
     <string name="labelCrearApp">Crear Aplicacion</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="boton_mapa">Mapa</string>
 </resources>

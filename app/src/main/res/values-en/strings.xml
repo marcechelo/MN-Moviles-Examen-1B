@@ -20,4 +20,5 @@
     <string name="labelCosto">Price</string>
     <string name="labelSoId">Operating System Id</string>
     <string name="labelCrearApp">Create App</string>
+    <string name="boton_mapa">Map</string>
 </resources>

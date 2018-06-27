@@ -56,11 +56,23 @@ class DetalleSOActivity : AppCompatActivity() {
             finish()
         }
 
+        boton_mapa.setOnClickListener { view: View ->
+            irAAtividadMapa()
+            finish()
+        }
+
     }
 
     fun irAAtividadCrearApp() {
         val intent = Intent(this, CrearAppActivity::class.java)
         intent.putExtra("tipo", "Create")
+        intent.putExtra("sistemaId", SisteOp?.id)
+        intent.putExtra("sistema",SisteOp)
+        startActivity(this, intent, null)
+    }
+
+    fun irAAtividadMapa() {
+        val intent = Intent(this, MapsActivity::class.java)
         intent.putExtra("sistemaId", SisteOp?.id)
         intent.putExtra("sistema",SisteOp)
         startActivity(this, intent, null)

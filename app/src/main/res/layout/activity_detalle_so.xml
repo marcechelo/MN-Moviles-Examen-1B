@@ -19,14 +19,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/boton_so_crear"
+        android:layout_width="82dp"
+        android:layout_height="57dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="1"
+        android:text="@string/botonNuevo"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/boton_mapa"
+        android:layout_width="82dp"
+        android:layout_height="57dp"
+        android:layout_weight="1"
+        android:text="@string/boton_mapa"
+        app:layout_constraintStart_toStartOf="@+id/boton_so_crear"
+        app:layout_constraintTop_toBottomOf="@+id/boton_so_crear" />
+
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="327dp"
-        android:layout_height="113dp"
+        android:layout_width="238dp"
+        android:layout_height="114dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.192"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -136,21 +157,6 @@
                 android:layout_below="@+id/txtv_peso_so" />
 
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/boton_so_crear"
-            android:layout_width="82dp"
-            android:layout_height="115dp"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="184dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:text="@string/botonNuevo"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view_app"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/relativeLayout" />
 
     </LinearLayout>
 

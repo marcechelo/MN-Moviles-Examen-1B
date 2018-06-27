@@ -9,7 +9,7 @@ class BaseDeDatosApp {
     companion object {
 
         fun postAplicacion(aplicacion: App) {
-            "http://192.168.1.3:1337/Aplicaciones".httpPost(listOf("nombreApp" to aplicacion.nombre, "pesoGigasApp" to aplicacion.pesoEnGigas, "version" to aplicacion.version, "urlApp" to aplicacion.urlDescarga, "fechaLanzamientoApp" to aplicacion.fechaLanzamiento, "costo" to aplicacion.costo, "sistemaOperativoId" to aplicacion.sistemaOperativoId))
+            "http://192.168.1.3:1337/Aplicaciones".httpPost(listOf("nombreApp" to aplicacion.nombre, "pesoGigasApp" to aplicacion.pesoEnGigas, "version" to aplicacion.version, "urlApp" to aplicacion.urlDescarga, "fechaLanzamientoApp" to aplicacion.fechaLanzamiento, "costo" to aplicacion.costo, "latitud" to aplicacion.latitud, "longitud" to aplicacion.longitud, "sistemaOperativoId" to aplicacion.sistemaOperativoId))
                     .responseString { request, response, result ->
                         Log.d("http-ejemplo", request.toString())
                     }
@@ -48,10 +48,10 @@ class BaseDeDatosApp {
                 val url = it["urlApp"] as String
                 val fecha = it["fechaLanzamientoApp"] as String
                 val costo = it["costo"] as Double
-                //val latitud = it["latitud"] as Double
-                //val longitud = it["longitud"] as Double
+                val latitud = it["latitud"] as Double
+                val longitud = it["longitud"] as Double
 
-                val app = App(id, nombre, peso, version, url, fecha, costo,idSistema, 0, 0)
+                val app = App(id, nombre, peso, version, url, fecha, costo, latitud, longitud, idSistema, 0, 0)
                 aplicaciones.add(app)
             }
             return aplicaciones

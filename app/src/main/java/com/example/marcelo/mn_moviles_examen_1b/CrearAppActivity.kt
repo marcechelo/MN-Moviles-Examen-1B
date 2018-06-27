@@ -14,6 +14,8 @@ class CrearAppActivity : AppCompatActivity() {
     var aplicacion: App? = null
     var tipo = false
     var soIntent: SO? = null
+    var longitu:Double = 0.0
+    var latitud: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +34,8 @@ class CrearAppActivity : AppCompatActivity() {
 
         boton_guardar_app.setOnClickListener { view: View ->
 
-            val latitud = -0.188193
-            val longitud = -78.472590
+            //val latitud = -0.188193
+            //val longitud = -78.472590
 
             if (!tipo){
 
@@ -48,13 +50,15 @@ class CrearAppActivity : AppCompatActivity() {
                     toast.show()
 
                 } else {
+                    var latitud = (-0.2103764..-0.2003764).random()
+                    var longitud = (-78.4991095..-78.4891095).random()
                     var nombre = edit_nombre_app.text.toString()
                     var peso = edit_peso_app.text.toString().toDouble()
                     var version =  edit_version.text.toString().toInt()
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(0,nombre,peso,version,url,fecha,costo,soId,0,0)
+                    var app = App(0,nombre,peso,version,url,fecha,costo,latitud,longitud,soId,0,0)
                     BaseDeDatosApp.postAplicacion(app)
                     irAActividadDetalleSo()
                 }
@@ -78,7 +82,7 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(aplicacion?.appid!!,nombre,peso,version,url,fecha,costo,soId,0,0)
+                    var app = App(aplicacion?.appid!!,nombre,peso,version,url,fecha,costo,this.latitud,this.longitu,soId,0,0)
                     BaseDeDatosApp.putAplicacion(app)
                     irAActividadDetalleSo()
                 }
@@ -87,6 +91,8 @@ class CrearAppActivity : AppCompatActivity() {
         }
     }
 
+    fun ClosedRange<Double>.random() = (Math.random() * (endInclusive - start) + start).toDouble()
+
     fun llenar(){
         edit_nombre_app.setText(aplicacion?.nombre)
         edit_peso_app.setText(aplicacion?.pesoEnGigas.toString())
@@ -94,6 +100,8 @@ class CrearAppActivity : AppCompatActivity() {
         edit_url.setText(aplicacion?.urlDescarga)
         edit_fecha_app.setText(aplicacion?.fechaLanzamiento)
         edit_costo.setText(aplicacion?.costo.toString())
+        this.longitu = aplicacion?.longitud!!
+        this.latitud = aplicacion?.latitud!!
     }
 
     fun irAActividadDetalleSo(){
