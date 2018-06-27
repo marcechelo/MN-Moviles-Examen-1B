@@ -1,11 +1,13 @@
 package com.example.marcelo.mn_moviles_examen_1b
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -28,7 +30,7 @@ class MapsActivity : AppCompatActivity(),
     lateinit var aplicaciones: ArrayList<App>
     var SisteOp: SO? = null
     var idSo = 0
-
+    var context:Context = this
     val epnLatLang = LatLng(-0.2103764, -78.4891095)
     val zoom = 17f
     var arregloMarcadores = ArrayList<Marker>()
@@ -48,9 +50,6 @@ class MapsActivity : AppCompatActivity(),
         /*val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)*/
-
-        idSo = intent.getIntExtra("idso",0)
-        aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
 
 
 
@@ -112,6 +111,11 @@ class MapsActivity : AppCompatActivity(),
         /*val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
+        idSo = intent.getIntExtra("idso",0)
+        aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
+
+        //val latleng = LatLng(aplicaciones[0].latitud,aplicaciones[0].longitud)
+        //val toast = Toast.makeText(this,aplicaciones.size.toString(),Toast.LENGTH_LONG)
         with(googleMap) {
 
             establecerListeners(googleMap)
@@ -120,11 +124,18 @@ class MapsActivity : AppCompatActivity(),
 
             anadirMarcador(epnLatLang, "Ciudad de quito")
 
+            idSo = intent.getIntExtra("sistemaId",0)
+            aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
+
+            //val latleng = LatLng(aplicaciones[0].latitud,aplicaciones[0].longitud)
+            //Log.i("mensaje",aplicaciones[0].latitud.toString())
 
             aplicaciones.forEach {
                 val latleng = LatLng(it.latitud,it.longitud)
                 anadirMarcador(latleng,it.nombre)
                 moverCamaraPorLatLongZoom(latleng, zoom)
+                //Log.i("mensaje",latleng.toString())
+
             }
 
             moverCamaraPorLatLongZoom(epnLatLang, zoom)
