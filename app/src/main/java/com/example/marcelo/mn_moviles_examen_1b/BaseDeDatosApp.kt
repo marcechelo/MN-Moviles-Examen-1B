@@ -9,21 +9,21 @@ class BaseDeDatosApp {
     companion object {
 
         fun postAplicacion(aplicacion: App) {
-            "http://192.168.1.3:1337/Aplicaciones".httpPost(listOf("nombreApp" to aplicacion.nombre, "pesoGigasApp" to aplicacion.pesoEnGigas, "version" to aplicacion.version, "urlApp" to aplicacion.urlDescarga, "fechaLanzamientoApp" to aplicacion.fechaLanzamiento, "costo" to aplicacion.costo, "latitud" to aplicacion.latitud, "longitud" to aplicacion.longitud, "sistemaOperativoId" to aplicacion.sistemaOperativoId))
+            "http://172.31.104.13:1337/Aplicaciones".httpPost(listOf("nombreApp" to aplicacion.nombre, "pesoGigasApp" to aplicacion.pesoEnGigas, "version" to aplicacion.version, "urlApp" to aplicacion.urlDescarga, "fechaLanzamientoApp" to aplicacion.fechaLanzamiento, "costo" to aplicacion.costo, "latitud" to aplicacion.latitud, "longitud" to aplicacion.longitud, "sistemaOperativoId" to aplicacion.sistemaOperativoId))
                     .responseString { request, response, result ->
                         Log.d("http-ejemplo", request.toString())
                     }
         }
 
         fun putAplicacion(aplicacion: App) {
-            "http://192.168.1.3:1337/Aplicaciones/${aplicacion.appid}".httpPut(listOf("nombreApp" to aplicacion.nombre, "pesoGigasApp" to aplicacion.pesoEnGigas, "version" to aplicacion.version, "urlApp" to aplicacion.urlDescarga, "fechaLanzamientoApp" to aplicacion.fechaLanzamiento, "costo" to aplicacion.costo, "sistemaOperativoId" to aplicacion.sistemaOperativoId))
+            "http://172.31.104.13:1337/Aplicaciones/${aplicacion.appid}".httpPut(listOf("nombreApp" to aplicacion.nombre, "pesoGigasApp" to aplicacion.pesoEnGigas, "version" to aplicacion.version, "urlApp" to aplicacion.urlDescarga, "fechaLanzamientoApp" to aplicacion.fechaLanzamiento, "costo" to aplicacion.costo, "sistemaOperativoId" to aplicacion.sistemaOperativoId))
                     .responseString { request, responde, result ->
                         Log.d("http-ejemplo", request.toString())
                     }
         }
 
         fun deleteAplicacion(id: Int) {
-            "http://192.168.1.3:1337/Aplicaciones/$id".httpDelete()
+            "http://172.31.104.13:1337/Aplicaciones/$id".httpDelete()
                     .responseString { request, response, result ->
                         Log.d("http-ejemplo", request.toString())
                     }
@@ -33,7 +33,7 @@ class BaseDeDatosApp {
             val aplicaciones: ArrayList<App> = ArrayList()
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
-            val (request, response, result) = "http://192.168.1.3:1337/Aplicaciones?sistemaOperativoId=$idSistema".httpGet().responseString()
+            val (request, response, result) = "http://172.31.104.13:1337/Aplicaciones?sistemaOperativoId=$idSistema".httpGet().responseString()
             val jsonStringLibro = result.get()
 
             val parser = Parser()
