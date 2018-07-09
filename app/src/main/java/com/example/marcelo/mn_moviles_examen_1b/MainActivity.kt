@@ -12,8 +12,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        boton_listar.setOnClickListener { view: View -> irAActividadListarSo() }
-        boton_refrescar.setOnClickListener { view: View -> irAActividadCrearSo() }
+        //boton_listar.setOnClickListener { view: View -> irAActividadListarSo() }
+        //boton_refrescar.setOnClickListener { view: View -> irAActividadCrearSo() }
 
     }
 

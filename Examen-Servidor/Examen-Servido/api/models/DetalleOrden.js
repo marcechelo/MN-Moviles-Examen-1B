@@ -17,8 +17,8 @@ module.exports = {
     },
 
     orden:{
-      model: 'Ordenes',
-      unique: true
+      model: 'Ordenes'
+      //unique: true
     }
 
 
