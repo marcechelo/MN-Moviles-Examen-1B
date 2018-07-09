@@ -21,4 +21,7 @@
     <string name="labelSoId">Operating System Id</string>
     <string name="labelCrearApp">Create App</string>
     <string name="boton_mapa">Map</string>
+    <string name="laberUsername">Username</string>
+    <string name="laberIngresar">Sign In</string>
+    <string name="laberPassword">Password</string>
 </resources>

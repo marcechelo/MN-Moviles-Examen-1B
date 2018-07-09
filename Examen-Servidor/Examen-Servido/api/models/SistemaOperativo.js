@@ -13,9 +13,15 @@ module.exports = {
     fechaLanzamiento:{type: "string"},
     pesoGigasSo:{type: "number"},
     instalado:{type: "number"},
+
     aplicaciones:{
       collection:"Aplicaciones",
       via:"sistemaOperativoId"
+    },
+
+    usuario:{
+      collection: 'Usuario',
+      via:'sistemaOperativo'
     }
   },
 
