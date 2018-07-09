@@ -16,9 +16,16 @@ module.exports = {
     costo: {type:"number"},
     latitud: {type:"number"},
     longitud: {type:"number"},
+
     sistemaOperativoId: {
       model:"SistemaOperativo"
+    },
+
+    detalleOrden:{
+      collection: 'DetalleOrden',
+      via:'aplicaciones'
     }
+
   },
 
 };
