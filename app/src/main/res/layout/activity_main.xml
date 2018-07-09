@@ -8,17 +8,17 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/boton_refrescar"
+        android:id="@+id/boton_ingresar"
         android:layout_width="120dp"
         android:layout_height="53dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="44dp"
         android:text="@string/laberIngresar"
-        app:layout_constraintEnd_toEndOf="@+id/editText2"
+        app:layout_constraintEnd_toEndOf="@+id/text_password"
         app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintStart_toStartOf="@+id/text_password"
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
 
     <EditText
         android:id="@+id/text_username"
@@ -36,7 +36,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/text_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

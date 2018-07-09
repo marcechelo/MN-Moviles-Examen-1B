@@ -10,21 +10,21 @@ class BaseDeDatosSo {
     companion object {
 
         fun postSistemaOperativo(sistema: SO) {
-            "http://172.31.104.13:1337/SistemaOperativo".httpPost(listOf("nombreSo" to sistema.nombre, "versionApi" to sistema.versionApi, "fechaLanzamiento" to sistema.fechaLanzamiento, "pesoGigasSo" to sistema.pesoEnGigas, "instalado" to sistema.instalado))
+            "http://172.31.105.205:1337/SistemaOperativo".httpPost(listOf("nombreSo" to sistema.nombre, "versionApi" to sistema.versionApi, "fechaLanzamiento" to sistema.fechaLanzamiento, "pesoGigasSo" to sistema.pesoEnGigas, "instalado" to sistema.instalado))
                     .responseString { request, response, result ->
                         Log.d("request", request.toString())
                     }
         }
 
         fun putSistemaOperativo(sistema: SO) {
-            "http://172.31.104.13:1337/SistemaOperativo/${sistema.id}".httpPut(listOf("nombreSo" to sistema.nombre, "versionApi" to sistema.versionApi, "fechaLanzamiento" to sistema.fechaLanzamiento, "pesoGigasSo" to sistema.pesoEnGigas, "instalado" to sistema.instalado))
+            "http://172.31.105.205:1337/SistemaOperativo/${sistema.id}".httpPut(listOf("nombreSo" to sistema.nombre, "versionApi" to sistema.versionApi, "fechaLanzamiento" to sistema.fechaLanzamiento, "pesoGigasSo" to sistema.pesoEnGigas, "instalado" to sistema.instalado))
                     .responseString { request, response, result ->
                         Log.d("request", request.toString())
                     }
         }
 
         fun deleteSistemaOperativo(id: Int) {
-            "http://172.31.104.13:1337/SistemaOperativo/$id".httpDelete()
+            "http://172.31.105.205:1337/SistemaOperativo/$id".httpDelete()
                     .responseString { request, response, result ->
                         Log.d("request", request.toString())
                     }
@@ -34,7 +34,7 @@ class BaseDeDatosSo {
             val sistemas: ArrayList<SO> = ArrayList()
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
-            val (request, response, result) = "http://172.31.104.13:1337/SistemaOperativo".httpGet().responseString()
+            val (request, response, result) = "http://172.31.105.205:1337/SistemaOperativo".httpGet().responseString()
             val jsonStringAutor = result.get()
 
             val parser = Parser()
