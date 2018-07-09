@@ -7,16 +7,17 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
-import android.widget.Toast
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationRequest
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import java.util.*
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+
+
 
 class MapsActivity : AppCompatActivity(),
         GoogleMap.OnCameraMoveStartedListener,
@@ -28,72 +29,35 @@ class MapsActivity : AppCompatActivity(),
         GoogleMap.OnPolygonClickListener {
 
     lateinit var aplicaciones: ArrayList<App>
-    var SisteOp: SO? = null
     var idSo = 0
     var context:Context = this
-    val epnLatLang = LatLng(-0.2103764, -78.4891095)
-    val zoom = 17f
+    private lateinit var mMap: GoogleMap
+
     var arregloMarcadores = ArrayList<Marker>()
+
+    val epnLatLang = LatLng(-0.2103764, -78.4891095)
+    //(-0.2103764, -78.4891095)
+
+    val zoom = 15f
+
     var usuarioTienePermisosLocalizacion = false;
 
-    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    lateinit var locationRequest: LocationRequest
-    lateinit var locationCallback: LocationCallback
-    val PERMISO_REQUEST = 1
-
-    private lateinit var mMap: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        /*val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)*/
-
-
 
         solicitarPermisosLocalizacion()
 
+        idSo = intent.getIntExtra("sistemaId",0)
+        aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+
         mapFragment.getMapAsync(this)
     }
-
-    fun solicitarPermisosLocalizacion() {
-        if (ContextCompat.checkSelfPermission(this.applicationContext,
-                        android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            usuarioTienePermisosLocalizacion = true
-        } else {
-            ActivityCompat.requestPermissions(this,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
-        }
-    }
-
-    override fun onCameraMoveStarted(p0: Int) {
-
-    }
-
-    override fun onCameraMove() {
-
-    }
-
-    override fun onCameraMoveCanceled() {
-
-    }
-
-    override fun onCameraIdle() {
-
-    }
-
-    override fun onPolylineClick(p0: Polyline?) {
-
-    }
-
-    override fun onPolygonClick(p0: Polygon?) {
-
-    }
-
 
     /**
      * Manipulates the map once available.
@@ -107,67 +71,39 @@ class MapsActivity : AppCompatActivity(),
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        /*val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
-        idSo = intent.getIntExtra("idso",0)
-        aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
-
-        //val latleng = LatLng(aplicaciones[0].latitud,aplicaciones[0].longitud)
-        //val toast = Toast.makeText(this,aplicaciones.size.toString(),Toast.LENGTH_LONG)
         with(googleMap) {
 
             establecerListeners(googleMap)
             establecerSettings(googleMap)
 
-
-            anadirMarcador(epnLatLang, "Ciudad de quito")
-
-            idSo = intent.getIntExtra("sistemaId",0)
-            aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
-
-            //val latleng = LatLng(aplicaciones[0].latitud,aplicaciones[0].longitud)
-            //Log.i("mensaje",aplicaciones[0].latitud.toString())
-
+            //idSo = intent.getIntExtra("sistemaId",0)
+            Log.i("mensaje",idSo.toString())
+            //var latleng = LatLng(aplicaciones[0].latitud,aplicaciones[0].longitud)
+            //aplicaciones = BaseDeDatosApp.getAplicaciones(idSo)
+            //anadirMarcador(latleng, aplicaciones[0].nombre)
+            //anadirMarcador(epnLatLang,"quito")
             aplicaciones.forEach {
-                val latleng = LatLng(it.latitud,it.longitud)
-                anadirMarcador(latleng,it.nombre)
+                var latleng = LatLng(it.latitud,it.longitud)
+                //latlngs.add(latleng)
+                //anadirMarcador(latleng, it.nombre)
+                //moverCamaraPorLatLongZoom(latleng, zoom)
+                googleMap.addMarker(MarkerOptions().position(latleng).title(it.nombre))
                 moverCamaraPorLatLongZoom(latleng, zoom)
-                //Log.i("mensaje",latleng.toString())
-
             }
 
-            moverCamaraPorLatLongZoom(epnLatLang, zoom)
 
+            //moverCamaraPorLatLongZoom(latleng, zoom)
 
-            /*button_quito_julio_andrade.setOnClickListener { v ->
-                anadirMarcador(casaCulturaLatLang, "Marcador en Quito Julio Andrade")
-
-
-                moverCamaraPorPosicion(casaCultura)
-            }
-
-            button_quito.setOnClickListener { v ->
-                anadirMarcador(supermaxiLatLang, "Marcador en Quito Julio Andrade")
-
-
-                moverCamaraPorPosicion(supermaxi)
-            }*/
         }
     }
 
-    private fun establecerListeners(googleMap: GoogleMap) {
-        with(googleMap) {
-
-            setOnCameraIdleListener(this@MapsActivity)
-            setOnCameraMoveStartedListener(this@MapsActivity)
-            setOnCameraMoveListener(this@MapsActivity)
-            setOnCameraMoveCanceledListener(this@MapsActivity)
-
-
-            setOnPolylineClickListener(this@MapsActivity)
-            setOnPolygonClickListener(this@MapsActivity)
+    fun solicitarPermisosLocalizacion() {
+        if (ContextCompat.checkSelfPermission(this.applicationContext,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            usuarioTienePermisosLocalizacion = true
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
         }
     }
 
@@ -194,9 +130,9 @@ class MapsActivity : AppCompatActivity(),
 
         arregloMarcadores.add(marker)
 
-        Log.i("map-adrian", "$arregloMarcadores")
-
+        Log.i("google-map", "$arregloMarcadores")
     }
+
 
     private fun moverCamaraPorLatLongZoom(latitudLongitud: LatLng, zoom: Float) {
 
@@ -207,6 +143,50 @@ class MapsActivity : AppCompatActivity(),
         )
 
 
+    }
+
+
+    private fun moverCamaraPorPosicion(posicionCamara: CameraPosition) {
+        mMap.moveCamera(
+                CameraUpdateFactory
+                        .newCameraPosition(posicionCamara)
+        )
+    }
+
+
+    private fun establecerListeners(googleMap: GoogleMap) {
+        with(googleMap) {
+
+            setOnCameraIdleListener(this@MapsActivity)
+            setOnCameraMoveStartedListener(this@MapsActivity)
+            setOnCameraMoveListener(this@MapsActivity)
+            setOnCameraMoveCanceledListener(this@MapsActivity)
+
+
+            setOnPolylineClickListener(this@MapsActivity)
+            setOnPolygonClickListener(this@MapsActivity)
+        }
+    }
+
+
+    override fun onCameraMoveStarted(p0: Int) {
+    }
+
+    override fun onCameraMove() {
+    }
+
+    override fun onCameraMoveCanceled() {
+    }
+
+    override fun onCameraIdle() {
+    }
+
+    override fun onPolylineClick(p0: Polyline?) {
+        Log.i("google-map", " Dio click en la ruta $p0")
+    }
+
+    override fun onPolygonClick(p0: Polygon?) {
+        Log.i("google-map", " Dio click en el poligono $p0")
     }
 
 }
