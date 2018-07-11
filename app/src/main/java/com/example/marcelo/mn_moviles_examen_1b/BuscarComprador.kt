@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_detalle_so.*
 import kotlinx.android.synthetic.main.activity_home_comprador.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class HomeComprador : AppCompatActivity() {
+class BuscarComprador : AppCompatActivity() {
 
     lateinit var adaptador: AplicacionAdaptador2
     lateinit var aplicaciones: ArrayList<App>

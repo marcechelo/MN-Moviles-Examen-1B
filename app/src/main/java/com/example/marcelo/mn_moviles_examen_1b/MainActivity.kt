@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                     2 -> {
-                        val intent = Intent(this,HomeComprador::class.java)
+                        val intent = Intent(this,HomePrincipalComprador::class.java)
+                        intent.putExtra("usuario",usuarios[0])
                         startActivity(intent)
                     }
                     3 -> {

@@ -77,10 +77,11 @@
         <activity android:name=".CrearAppActivity" />
         <activity android:name=".DetalleAppActivity" />
         <activity android:name=".HomeVendedor" />
-        <activity android:name=".HomeComprador" />
+        <activity android:name=".BuscarComprador" />
         <activity android:name=".HomeDelivery" />
         <activity android:name=".TomarFoto" />
-        <activity android:name=".Carrito"></activity>
+        <activity android:name=".Carrito" />
+        <activity android:name=".HomePrincipalComprador"></activity>
     </application>
 
 </manifest>
