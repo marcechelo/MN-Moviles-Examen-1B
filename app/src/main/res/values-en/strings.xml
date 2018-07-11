@@ -27,4 +27,6 @@
     <string name="botonTomarFoto">Take Picture</string>
     <string name="botonBuscar">Search</string>
     <string name="botonTodos">Show All</string>
+    <string name="botonOrdenes">Orders</string>
+    <string name="botonCancelar">Cancel</string>
 </resources>

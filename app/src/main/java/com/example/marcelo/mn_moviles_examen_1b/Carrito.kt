@@ -1,5 +1,6 @@
 package com.example.marcelo.mn_moviles_examen_1b
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
@@ -49,8 +50,30 @@ class Carrito : AppCompatActivity() {
             aplicaciones.forEach{
                 BaseDeDatosApp.putAplicacionEstado(it,3)
             }
+
+            irAActividadOrdenes()
         }
 
+        boton_cancelar.setOnClickListener{view: View ->
+            aplicaciones.forEach{
+                BaseDeDatosApp.putAplicacionEstado(it,1)
+            }
+
+            irAActividadBuscar()
+        }
+
+    }
+
+    fun irAActividadOrdenes(){
+        val intent = Intent(this,OrdenesComprador::class.java)
+        intent.putExtra("tipo", "Create")
+        startActivity(intent)
+    }
+
+    fun irAActividadBuscar(){
+        val intent = Intent(this,BuscarComprador::class.java)
+        intent.putExtra("tipo", "Create")
+        startActivity(intent)
     }
 
 }

@@ -1,7 +1,9 @@
 package com.example.marcelo.mn_moviles_examen_1b
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import kotlinx.android.synthetic.main.activity_home_principal_comprador.*
 
 class HomePrincipalComprador : AppCompatActivity() {
@@ -14,5 +16,25 @@ class HomePrincipalComprador : AppCompatActivity() {
 
         text_saludo_comprador.text = "Bienvenido ${usuario.username}"
 
+        boton_buscar.setOnClickListener { view: View ->
+            irAActividadBuscar()
+        }
+
+        boton_ordenes.setOnClickListener { view: View ->
+            irAActividadOrdenes()
+        }
+
+    }
+
+    fun irAActividadBuscar(){
+        val intent = Intent(this,BuscarComprador::class.java)
+        intent.putExtra("tipo", "Create")
+        startActivity(intent)
+    }
+
+    fun irAActividadOrdenes(){
+        val intent = Intent(this,OrdenesComprador::class.java)
+        intent.putExtra("tipo", "Create")
+        startActivity(intent)
     }
 }

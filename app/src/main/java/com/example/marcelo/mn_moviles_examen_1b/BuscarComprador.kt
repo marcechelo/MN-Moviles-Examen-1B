@@ -51,14 +51,18 @@ class BuscarComprador : AppCompatActivity() {
             registerForContextMenu(recyclerview_lista_apps)
         }
 
-        boton_carrito.setOnClickListener{view: View -> irAActividadCarrito()}
+        boton_carrito.setOnClickListener{view: View ->
+            irAActividadCarrito()
+        }
 
     }
 
     fun irAActividadCarrito(){
         val intent = Intent(this,Carrito::class.java)
         intent.putIntegerArrayListExtra("ids",arregloIds)
+        arregloIds = ArrayList()
         startActivity(intent)
+
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {

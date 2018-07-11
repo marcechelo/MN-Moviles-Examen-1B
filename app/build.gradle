@@ -4,15 +4,41 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+
+        }
+        dependencies {
+            classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.10.1, 0.99.99]'
+        }
+    }
+}
+
+repositories {
+    maven {
+        name = 'Maven Central Repo' //optional name
+        url = 'http://repo1.maven.org/maven2/'
+    }
+    mavenCentral()
+    google()
+}
+
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.example.marcelo.mn_moviles_examen_1b"
-        minSdkVersion 17
-        targetSdkVersion 27
+        minSdkVersion 15
+        targetSdkVersion 17
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                onesignal_app_id               : 'd8c221bf-fd1a-465e-8f55-adad16a410ab',
+                // Project number pulled from dashboard, local value is ignored.
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
     buildTypes {
         release {
@@ -37,3 +63,4 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.1'
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
 }
+

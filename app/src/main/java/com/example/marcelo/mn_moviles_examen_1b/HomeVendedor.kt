@@ -24,7 +24,7 @@ class HomeVendedor : AppCompatActivity() {
     }
 
     fun irAActividadCamara(){
-        val intent = Intent(this,TomarFoto::class.java)
+        val intent = Intent(this,Camara2::class.java)
         startActivity(intent)
     }
 
