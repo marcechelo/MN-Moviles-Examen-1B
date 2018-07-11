@@ -10,10 +10,11 @@ class App(var appid: Int,
           var urlDescarga: String,
           var fechaLanzamiento: String,
           var costo: Double,
+          var estado: Int,
           //var latitud: Double,
           //var longitud: Double,
           var sistemaOperativoId: Int,
-          var foto: String,
+          //var foto: String,
           var createdAt: Long,
           var updatedAt: Long) : Parcelable {
 
@@ -28,7 +29,8 @@ class App(var appid: Int,
             //parcel.readDouble(),
             //parcel.readDouble(),
             parcel.readInt(),
-            parcel.readString(),
+            parcel.readInt(),
+            //parcel.readString(),
             parcel.readLong(),
             parcel.readLong()) {
     }
@@ -47,8 +49,9 @@ class App(var appid: Int,
         destino?.writeDouble(costo)
         //destino?.writeDouble(latitud)
         //destino?.writeDouble(longitud)
+        destino?.writeInt(estado)
         destino?.writeInt(sistemaOperativoId)
-        destino?.writeString(foto)
+        //destino?.writeString(foto)
         destino?.writeLong(createdAt)
         destino?.writeLong(updatedAt)
     }

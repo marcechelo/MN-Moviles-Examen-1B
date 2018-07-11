@@ -62,7 +62,7 @@
 
     <ImageView
         android:id="@+id/imagen_view"
-        android:layout_width="100dp"
+        android:layout_width="71dp"
         android:layout_height="70dp"
         android:layout_above="@+id/boton_detalle"
         android:layout_alignParentEnd="true"

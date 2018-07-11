@@ -21,7 +21,8 @@
     <uses-feature
         android:name="android.hardware.sensor.compass"
         android:required="true" />
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -31,6 +32,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- The API key for Google Maps-based APIs. -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -40,9 +48,6 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/. 
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -51,7 +56,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
         <!--
@@ -74,7 +79,8 @@
         <activity android:name=".HomeVendedor" />
         <activity android:name=".HomeComprador" />
         <activity android:name=".HomeDelivery" />
-        <activity android:name=".TomarFoto"></activity>
+        <activity android:name=".TomarFoto" />
+        <activity android:name=".Carrito"></activity>
     </application>
 
 </manifest>

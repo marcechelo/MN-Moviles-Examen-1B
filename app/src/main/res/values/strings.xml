@@ -26,4 +26,6 @@
     <string name="laberIngresar">Ingresar</string>
     <string name="laberPassword">Contraseña</string>
     <string name="botonTomarFoto">Tomar Foto</string>
+    <string name="botonBuscar">Buscar</string>
+    <string name="botonTodos">Todos</string>
 </resources>

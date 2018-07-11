@@ -14,6 +14,7 @@ module.exports = {
     urlApp: {type:"string"},
     fechaLanzamientoApp: {type:"string"},
     costo: {type:"number"},
+    estado: {type:"number"},
     //latitud: {type:"number"},
     //longitud: {type:"number"},
     foto: {type:"string"},

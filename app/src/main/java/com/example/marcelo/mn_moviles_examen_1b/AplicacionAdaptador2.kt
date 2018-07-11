@@ -7,13 +7,14 @@ import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 
-class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerView.Adapter<AplicacionAdaptador.MyViewHolder>() {
+class AplicacionAdaptador2(private val listaAplicaciones: List<App>) : RecyclerView.Adapter<AplicacionAdaptador2.MyViewHolder>() {
 
     private var position: Int = 0
 
@@ -46,10 +47,11 @@ class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerVi
         }
 
         override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-            menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Editar")
-            menu?.add(Menu.NONE, R.id.item_menu_borrar, Menu.NONE, "Borrar")
-            menu?.add(Menu.NONE, R.id.item_menu_compartir, Menu.NONE, "Compartir")
+
+            menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Seleccionar")
+            //menu?.add(Menu.NONE, R.id.item_menu_borrar, Menu.NONE, "Quitar")
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -61,7 +63,21 @@ class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerVi
         val aplicacion = listaAplicaciones[position]
         holder.nombre.text = aplicacion.nombre
         holder.costo.text = aplicacion.costo.toString()
-        holder.urlDescarga.text = aplicacion.urlDescarga
+
+        when(aplicacion.estado){
+            1 ->{
+                holder.urlDescarga.text = "Disponible"
+            }
+            2 ->{
+                holder.urlDescarga.text = "Seleccionado"
+            }
+            3 ->{
+                holder.urlDescarga.text = "No Disponible"
+            }
+            else ->{
+                Log.i("Error","Error")}
+        }
+
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
         holder.aplicacion = aplicacion
 

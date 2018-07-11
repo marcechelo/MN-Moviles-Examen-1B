@@ -42,6 +42,7 @@ class ListarSOActivity : AppCompatActivity() {
         adaptador.notifyDataSetChanged()
         registerForContextMenu(recycler_view)
 
+
     }
 
     override fun onContextItemSelected(item: MenuItem):Boolean {

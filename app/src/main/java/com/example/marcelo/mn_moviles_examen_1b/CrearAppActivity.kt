@@ -66,10 +66,10 @@ class CrearAppActivity : AppCompatActivity() {
                         edit_version.text.toString().isEmpty() ||
                         edit_url.text.toString().isEmpty() ||
                         edit_fecha_app.text.toString().isEmpty() ||
-                        edit_costo.text.toString().isEmpty() ||
-                        this.fileName.isBlank()) {
+                        edit_costo.text.toString().isEmpty()){ //||this.fileName.isBlank())
 
-                    val toast = Toast.makeText(this, "Todos los campos deben estra lleno", Toast.LENGTH_SHORT)
+
+                            val toast = Toast.makeText(this, "Todos los campos deben estra lleno", Toast.LENGTH_SHORT)
                     toast.show()
 
                 } else {
@@ -81,7 +81,7 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(0, nombre, peso, version, url, fecha, costo, soId, fileName, 0, 0)
+                    var app = App(0, nombre, peso, version, url, fecha, costo, 1,  soId, 0, 0)
                     BaseDeDatosApp.postAplicacion(app)
                     irAActividadDetalleSo()
                 }
@@ -93,8 +93,8 @@ class CrearAppActivity : AppCompatActivity() {
                         edit_version.text.toString().isEmpty() ||
                         edit_url.text.toString().isEmpty() ||
                         edit_fecha_app.text.toString().isEmpty() ||
-                        edit_costo.text.toString().isEmpty() ||
-                        this.fileName.isBlank()) {
+                        edit_costo.text.toString().isEmpty() //|| this.fileName.isBlank()
+                        ) {
 
                     val toast = Toast.makeText(this, "Todos los campos deben estra lleno", Toast.LENGTH_SHORT)
                     toast.show()
@@ -111,7 +111,7 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(aplicacion?.appid!!, nombre, peso, version, url, fecha, costo, soId, urlfoto,0, 0)
+                    var app = App(aplicacion?.appid!!, nombre, peso, version, url, fecha, costo, 1, soId,0, 0)
                     BaseDeDatosApp.putAplicacion(app)
                     irAActividadDetalleSo()
                 }
@@ -129,7 +129,7 @@ class CrearAppActivity : AppCompatActivity() {
         edit_url.setText(aplicacion?.urlDescarga)
         edit_fecha_app.setText(aplicacion?.fechaLanzamiento)
         edit_costo.setText(aplicacion?.costo.toString())
-        this.foto = aplicacion?.foto!!
+        //this.foto = aplicacion?.foto!!
         //this.longitu = aplicacion?.longitud!!
         //this.latitud = aplicacion?.latitud!!
     }
