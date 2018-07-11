@@ -1,4 +1,4 @@
-package com.example.marcelo.mn_moviles_examen_1b
+/*package com.example.marcelo.mn_moviles_examen_1b
 
 import android.content.Context
 import android.content.pm.PackageManager
@@ -59,7 +59,7 @@ class MapsActivity : AppCompatActivity(),
         mapFragment.getMapAsync(this)
     }
 
-    /**
+    *//**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
@@ -67,7 +67,7 @@ class MapsActivity : AppCompatActivity(),
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
-     */
+     *//*
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -189,4 +189,4 @@ class MapsActivity : AppCompatActivity(),
         Log.i("google-map", " Dio click en el poligono $p0")
     }
 
-}
+}*/

@@ -56,10 +56,10 @@ class DetalleSOActivity : AppCompatActivity() {
             finish()
         }
 
-        boton_mapa.setOnClickListener { view: View ->
+        /*boton_mapa.setOnClickListener { view: View ->
             irAAtividadMapa()
             finish()
-        }
+        }*/
 
     }
 
@@ -71,12 +71,12 @@ class DetalleSOActivity : AppCompatActivity() {
         startActivity(this, intent, null)
     }
 
-    fun irAAtividadMapa() {
+    /*fun irAAtividadMapa() {
         val intent = Intent(this, MapsActivity::class.java)
         intent.putExtra("sistemaId", SisteOp?.id)
         intent.putExtra("sistema",SisteOp)
         startActivity(this, intent, null)
-    }
+    }*/
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
 

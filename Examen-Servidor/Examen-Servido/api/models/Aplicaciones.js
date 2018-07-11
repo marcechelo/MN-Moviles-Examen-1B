@@ -14,8 +14,9 @@ module.exports = {
     urlApp: {type:"string"},
     fechaLanzamientoApp: {type:"string"},
     costo: {type:"number"},
-    latitud: {type:"number"},
-    longitud: {type:"number"},
+    //latitud: {type:"number"},
+    //longitud: {type:"number"},
+    foto: {type:"string"},
 
     sistemaOperativoId: {
       model:"SistemaOperativo"
@@ -23,6 +24,11 @@ module.exports = {
 
     detalleOrden:{
       collection: 'DetalleOrden',
+      via:'aplicaciones'
+    },
+
+    fotos:{
+      collection:'Fotos',
       via:'aplicaciones'
     }
 

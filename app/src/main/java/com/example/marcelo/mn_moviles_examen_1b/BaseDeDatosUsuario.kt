@@ -11,11 +11,12 @@ class BaseDeDatosUsuario {
 
     companion object {
 
+        val ip = "192.168.1.4:1337"
         fun getUsuario(usuario: String): ArrayList<Usuario> {
             val usuarios: ArrayList<Usuario> = ArrayList()
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
             StrictMode.setThreadPolicy(policy)
-            val (request, response, result) = "http://172.31.105.205:1337/Usuario?username=$usuario".httpGet().responseString()
+            val (request, response, result) = "http://${this.ip}/Usuario?username=$usuario".httpGet().responseString()
             val jsonStringLibro = result.get()
 
             val parser = Parser()
@@ -27,8 +28,10 @@ class BaseDeDatosUsuario {
                 val username = it["username"] as String
                 val password = it["password"] as String
                 val tipo = it["tipo"] as Int
+                val created = it["createdAt"] as Long
+                val updated = it["updatedAt"] as Long
 
-                val usuario = Usuario(id, tipo, username, password)
+                val usuario = Usuario(id, tipo, username, password, created, updated)
                 usuarios.add(usuario)
             }
             return usuarios

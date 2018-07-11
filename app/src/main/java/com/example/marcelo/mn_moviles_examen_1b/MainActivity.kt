@@ -46,8 +46,26 @@ class MainActivity : AppCompatActivity() {
         }else{
             val contraseña = text_password.text.toString()
             if (usuarios[0].password.equals(contraseña)){
-                val intent = Intent(this,ListarSOActivity::class.java)
-                startActivity(intent)
+                when(usuarios[0].tipo){
+                    1 -> {
+                        val intent = Intent(this,HomeVendedor::class.java)
+                        startActivity(intent)
+                    }
+                    2 -> {
+                        val intent = Intent(this,HomeComprador::class.java)
+                        startActivity(intent)
+                    }
+                    3 -> {
+                        val intent = Intent(this,HomeDelivery::class.java)
+                        startActivity(intent)
+                    }
+                    else -> {
+                        val toast = Toast.makeText(this,"Usuario No Tiene Tipo",Toast.LENGTH_SHORT)
+                        toast.show()
+                    }
+                }
+                //val intent = Intent(this,ListarSOActivity::class.java)
+                //startActivity(intent)
             }else{
                 val toast = Toast.makeText(this,"Contraseña Incorrecta",Toast.LENGTH_SHORT)
                 toast.show()

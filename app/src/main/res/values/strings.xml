@@ -25,4 +25,5 @@
     <string name="laberUsername">Usuario</string>
     <string name="laberIngresar">Ingresar</string>
     <string name="laberPassword">Contraseña</string>
+    <string name="botonTomarFoto">Tomar Foto</string>
 </resources>

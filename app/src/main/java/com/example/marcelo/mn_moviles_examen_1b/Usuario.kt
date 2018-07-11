@@ -6,13 +6,17 @@ import android.os.Parcelable
 class Usuario (var id: Int,
                var tipo: Int,
                var username: String,
-               var password: String): Parcelable{
+               var password: String,
+               var createdAt: Long,
+               var updatedAt: Long): Parcelable{
 
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readInt(),
             parcel.readString(),
-            parcel.readString()) {
+            parcel.readString(),
+            parcel.readLong(),
+            parcel.readLong()) {
     }
 
     override fun describeContents(): Int {
@@ -24,6 +28,8 @@ class Usuario (var id: Int,
         destino?.writeInt(tipo)
         destino?.writeString(username)
         destino?.writeString(password)
+        destino?.writeLong(createdAt)
+        destino?.writeLong(updatedAt)
     }
 
     companion object CREATOR : Parcelable.Creator<Usuario> {
