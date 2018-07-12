@@ -64,6 +64,22 @@ class AplicacionAdaptador2(private val listaAplicaciones: List<App>) : RecyclerV
         holder.nombre.text = aplicacion.nombre
         holder.costo.text = aplicacion.costo.toString()
 
+        // Get the dimensions of the bitmap
+        val bmOptions = BitmapFactory.Options()
+        bmOptions.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(aplicacion.foto, bmOptions)
+
+        // Determine how much to scale down the image
+        //val scaleFactor = Math.min(photoW / targetW, photoH / targetH)
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false
+        //bmOptions.inSampleSize = scaleFactor
+        bmOptions.inPurgeable = true
+
+        val bitmap = BitmapFactory.decodeFile(aplicacion.foto, bmOptions)
+        holder.imagen.setImageBitmap(bitmap)
+
         when(aplicacion.estado){
             1 ->{
                 holder.urlDescarga.text = "Disponible"

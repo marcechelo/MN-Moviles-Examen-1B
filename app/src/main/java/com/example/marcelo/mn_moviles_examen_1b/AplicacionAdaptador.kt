@@ -65,6 +65,23 @@ class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerVi
         holder.botonDetalle.setBackgroundColor(Color.GRAY)
         holder.aplicacion = aplicacion
 
+
+        // Get the dimensions of the bitmap
+        val bmOptions = BitmapFactory.Options()
+        bmOptions.inJustDecodeBounds = true
+        BitmapFactory.decodeFile(aplicacion.foto, bmOptions)
+
+        // Determine how much to scale down the image
+        //val scaleFactor = Math.min(photoW / targetW, photoH / targetH)
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false
+        //bmOptions.inSampleSize = scaleFactor
+        bmOptions.inPurgeable = true
+
+        val bitmap = BitmapFactory.decodeFile(aplicacion.foto, bmOptions)
+        holder.imagen.setImageBitmap(bitmap)
+
         holder.botonDetalle.setOnClickListener { view: View ->
             var intent = Intent(view.context, DetalleAppActivity::class.java)
             intent.putExtra("app",aplicacion)
@@ -88,4 +105,5 @@ class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerVi
     override fun getItemCount(): Int {
         return listaAplicaciones.size
     }
+
 }

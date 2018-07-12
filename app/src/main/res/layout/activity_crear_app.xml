@@ -22,15 +22,13 @@
 
     <ImageView
         android:id="@+id/imagen_crear_app"
-        android:layout_width="158dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="160dp"
+        android:layout_height="130dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="@+id/txt_descripcion_app"
         app:layout_constraintStart_toStartOf="@+id/txt_descripcion_app"
         app:layout_constraintTop_toBottomOf="@+id/txt_descripcion_app"
@@ -40,8 +38,14 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="406dp"
-        tools:layout_editor_absoluteX="177dp"
-        tools:layout_editor_absoluteY="105dp">
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagen_crear_app">
 
         <LinearLayout
             android:layout_width="match_parent"

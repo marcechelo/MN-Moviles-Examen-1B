@@ -47,11 +47,16 @@ class Carrito : AppCompatActivity() {
 
         boton_guardar.setOnClickListener{view: View ->
 
-            aplicaciones.forEach{
-                BaseDeDatosApp.putAplicacionEstado(it,3)
-            }
+            if(arreglo.size === 0){
+                val toast = Toast.makeText(this,"No existen Items seleccionado",Toast.LENGTH_SHORT)
+                toast.show()
+            }else {
+                aplicaciones.forEach {
+                    BaseDeDatosApp.putAplicacionEstado(it, 3)
+                }
 
-            irAActividadOrdenes()
+                irAActividadOrdenes()
+            }
         }
 
         boton_cancelar.setOnClickListener{view: View ->
@@ -66,13 +71,12 @@ class Carrito : AppCompatActivity() {
 
     fun irAActividadOrdenes(){
         val intent = Intent(this,OrdenesComprador::class.java)
-        intent.putExtra("tipo", "Create")
+        intent.putExtra("aplicaciones", aplicaciones)
         startActivity(intent)
     }
 
     fun irAActividadBuscar(){
         val intent = Intent(this,BuscarComprador::class.java)
-        intent.putExtra("tipo", "Create")
         startActivity(intent)
     }
 
