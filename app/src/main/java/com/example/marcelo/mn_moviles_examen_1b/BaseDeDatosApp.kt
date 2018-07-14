@@ -9,7 +9,7 @@ class BaseDeDatosApp {
 
 
     companion object {
-        val ip = "192.168.1.4:1337"
+        val ip = "192.168.1.5:1337"
 
         fun postAplicacion(aplicacion: App) {
             "http://${this.ip}/Aplicaciones".httpPost(listOf("nombreApp" to aplicacion.nombre, "pesoGigasApp" to aplicacion.pesoEnGigas, "version" to aplicacion.version, "urlApp" to aplicacion.urlDescarga, "fechaLanzamientoApp" to aplicacion.fechaLanzamiento, "costo" to aplicacion.costo, "estado" to aplicacion.estado, "sistemaOperativoId" to aplicacion.sistemaOperativoId, "foto" to aplicacion.foto))
