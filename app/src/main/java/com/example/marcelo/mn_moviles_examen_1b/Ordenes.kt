@@ -7,8 +7,9 @@ class Ordenes(var id: Int,
               var fecha: String,
               var total: Double,
               var estado: Int,
-              var latitud: Double,
-              var longitud: Double,
+              /*var latitud: Double,
+              var longitud: Double,*/
+              var lugar: String,
               var costoDelivery: Double,
               var fechaEntrega: String,
               var idUsuario:Int,
@@ -21,8 +22,9 @@ class Ordenes(var id: Int,
             parcel.readString(),
             parcel.readDouble(),
             parcel.readInt(),
-            parcel.readDouble(),
-            parcel.readDouble(),
+            /*parcel.readDouble(),
+            parcel.readDouble(),*/
+            parcel.readString(),
             parcel.readDouble(),
             parcel.readString(),
             parcel.readInt(),
@@ -40,8 +42,9 @@ class Ordenes(var id: Int,
         destino?.writeString(fecha)
         destino?.writeDouble(total)
         destino?.writeInt(estado)
-        destino?.writeDouble(latitud)
-        destino?.writeDouble(longitud)
+        /*destino?.writeDouble(latitud)
+        destino?.writeDouble(longitud)*/
+        destino?.writeString(lugar)
         destino?.writeDouble(costoDelivery)
         destino?.writeString(fechaEntrega)
         destino?.writeInt(idUsuario)

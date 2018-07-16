@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomeVendedor">
+
 
     <Button
         android:id="@+id/boton_crear"
@@ -28,7 +30,8 @@
         app:layout_constraintEnd_toEndOf="@+id/boton_crear"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/boton_crear"
-        app:layout_constraintTop_toBottomOf="@+id/boton_crear" />
+        app:layout_constraintTop_toBottomOf="@+id/boton_crear"
+        android:layout_marginLeft="8dp" />
 
     <Button
         android:id="@+id/boton_foto"
@@ -38,5 +41,6 @@
         android:layout_marginTop="44dp"
         android:text="Button"
         app:layout_constraintStart_toStartOf="@+id/boton_listar"
-        app:layout_constraintTop_toBottomOf="@+id/boton_listar" />
+        app:layout_constraintTop_toBottomOf="@+id/boton_listar"
+        android:layout_marginLeft="8dp" />
 </android.support.constraint.ConstraintLayout>

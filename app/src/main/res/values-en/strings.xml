@@ -29,4 +29,9 @@
     <string name="botonTodos">Show All</string>
     <string name="botonOrdenes">Orders</string>
     <string name="botonCancelar">Cancel</string>
+    <string name="botonCrearOrden">Create Order</string>
+    <string name="labelFecha">Date</string>
+    <string name="labelEstado">State</string>
+    <string name="labelIdOrden">ID Order</string>
+    <string name="labelIdLugar">Place of Delivery</string>
 </resources>

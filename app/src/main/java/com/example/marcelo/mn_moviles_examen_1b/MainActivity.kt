@@ -1,11 +1,14 @@
 package com.example.marcelo.mn_moviles_examen_1b
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.github.kittinunf.fuel.core.requests.write
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.FileOutputStream
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +22,9 @@ class MainActivity : AppCompatActivity() {
 
         //boton_listar.setOnClickListener { view: View -> irAActividadListarSo() }
         //boton_refrescar.setOnClickListener { view: View -> irAActividadCrearSo() }
+        text_password.setOnClickListener {view: View ->
+            text_password.text.clear()
+        }
         boton_ingresar.setOnClickListener{view: View -> logIn()}
 
     }
@@ -48,15 +54,18 @@ class MainActivity : AppCompatActivity() {
             if (usuarios[0].password.equals(contraseña)){
                 when(usuarios[0].tipo){
                     1 -> {
+                        guardarUsuario(usuarios[0].username,usuarios[0].password)
                         val intent = Intent(this,HomeVendedor::class.java)
                         startActivity(intent)
                     }
                     2 -> {
+                        guardarUsuario(usuarios[0].username,usuarios[0].password)
                         val intent = Intent(this,HomePrincipalComprador::class.java)
                         intent.putExtra("usuario",usuarios[0])
                         startActivity(intent)
                     }
                     3 -> {
+                        guardarUsuario(usuarios[0].username,usuarios[0].password)
                         val intent = Intent(this,HomeDelivery::class.java)
                         startActivity(intent)
                     }
@@ -75,5 +84,16 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    fun guardarUsuario(usuario: String, contraseña: String){
 
+        val FILENAME ="usuario"
+        this.openFileOutput(FILENAME, Context.MODE_PRIVATE).use {
+            it.write(usuario.toByteArray())
+        }
+
+        val FILENAMEUNO ="contraseña"
+        this.openFileOutput(FILENAMEUNO, Context.MODE_PRIVATE).use {
+            it.write(contraseña.toByteArray())
+        }
+    }
 }

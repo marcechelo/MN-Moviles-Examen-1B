@@ -16,17 +16,20 @@ module.exports = {
     // Ubicacion de Entrega
     latitud: {type:"number"},
     longitud: {type:"number"},
+    lugar: {type: "string"},
     costoDelivery:{type: "number"},
     fechaEntrega:{type: "string"},
 
     usuario:{
-      model:'Usuario'
+      collection:'Usuario',
+      via: 'ordenes'
 
     },
 
     detalleOrden:{
       collection:'DetalleOrden',
       via:'orden'
+
     }
 
 

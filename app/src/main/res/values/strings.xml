@@ -30,4 +30,10 @@
     <string name="botonTodos">Todos</string>
     <string name="botonOrdenes">Ordenes</string>
     <string name="botonCancelar">Cancelar</string>
+    <string name="botonCrearOrden">Crear Orden</string>
+    <string name="labelFecha">Fecha</string>
+    <string name="labelTota">Total</string>
+    <string name="labelEstado">Estado</string>
+    <string name="labelIdOrden">ID Orden</string>
+    <string name="labelIdLugar">Lugar de Entrega</string>
 </resources>

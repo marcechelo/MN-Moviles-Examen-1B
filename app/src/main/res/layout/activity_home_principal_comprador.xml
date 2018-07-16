@@ -47,5 +47,6 @@
         app:layout_constraintEnd_toEndOf="@+id/boton_buscar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/boton_buscar"
-        app:layout_constraintTop_toBottomOf="@+id/boton_buscar" />
+        app:layout_constraintTop_toBottomOf="@+id/boton_buscar"
+        android:layout_marginRight="8dp" />
 </android.support.constraint.ConstraintLayout>

@@ -24,8 +24,7 @@ module.exports = {
     },
 
     detalleOrden:{
-      collection: 'DetalleOrden',
-      via:'aplicaciones'
+      model: 'DetalleOrden',
     },
 
     fotos:{

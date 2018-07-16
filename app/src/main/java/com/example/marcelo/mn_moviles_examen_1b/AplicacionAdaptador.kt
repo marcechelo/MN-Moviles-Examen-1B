@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageView
@@ -46,9 +47,11 @@ class AplicacionAdaptador(private val listaAplicaciones: List<App>) : RecyclerVi
         }
 
         override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
-            menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Editar")
-            menu?.add(Menu.NONE, R.id.item_menu_borrar, Menu.NONE, "Borrar")
-            menu?.add(Menu.NONE, R.id.item_menu_compartir, Menu.NONE, "Compartir")
+
+                    menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Editar")
+                    menu?.add(Menu.NONE, R.id.item_menu_borrar, Menu.NONE, "Borrar")
+                    menu?.add(Menu.NONE, R.id.item_menu_compartir, Menu.NONE, "Compartir")
+
         }
     }
 

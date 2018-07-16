@@ -82,7 +82,7 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(0, nombre, peso, version, url, fecha, costo, 1,  soId, this.fileName, 0, 0)
+                    var app = App(0, nombre, peso, version, url, fecha, costo, 1,  soId, 0, this.fileName, 0, 0)
                     BaseDeDatosApp.postAplicacion(app)
                     irAActividadDetalleSo()
                 }
@@ -112,7 +112,7 @@ class CrearAppActivity : AppCompatActivity() {
                     var url = edit_url.text.toString()
                     var fecha = edit_fecha_app.text.toString()
                     var costo = edit_costo.text.toString().toDouble()
-                    var app = App(aplicacion?.appid!!, nombre, peso, version, url, fecha, costo, 1, soId, urlfoto, 0, 0)
+                    var app = App(aplicacion?.appid!!, nombre, peso, version, url, fecha, costo, 1, soId, 0, urlfoto, 0, 0)
                     BaseDeDatosApp.putAplicacion(app)
                     irAActividadDetalleSo()
                 }

@@ -19,17 +19,22 @@ class BuscarComprador : AppCompatActivity() {
     lateinit var adaptador: AplicacionAdaptador2
     lateinit var aplicaciones: ArrayList<App>
     lateinit var arregloIds: ArrayList<Int>
+    lateinit var aplicacionesAux: ArrayList<App>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_comprador)
 
+        //arregloIds: Arra = savedInstanceState?.get("appIds") as ArrayList<Int>
+        aplicaciones = ArrayList()
         arregloIds = ArrayList()
+        aplicacionesAux = ArrayList()
+
         boton_buscar.setOnClickListener { view: View ->
             val busqueda = text_buscar.text.toString()
             aplicaciones = BaseDeDatosApp.getAplicacionesBusqueda(busqueda)
             val layoutManager = LinearLayoutManager(this)
-            adaptador = AplicacionAdaptador2(aplicaciones)
+            adaptador = AplicacionAdaptador2(aplicaciones,1)
             adaptador.notifyDataSetChanged()
             recyclerview_lista_apps.layoutManager = layoutManager
             recyclerview_lista_apps.itemAnimator = DefaultItemAnimator()
@@ -42,7 +47,7 @@ class BuscarComprador : AppCompatActivity() {
         boton_mostrar_todos.setOnClickListener {view: View ->
             aplicaciones = BaseDeDatosApp.getTodasAplicaciones()
             val layoutManager = LinearLayoutManager(this)
-            adaptador = AplicacionAdaptador2(aplicaciones)
+            adaptador = AplicacionAdaptador2(aplicaciones,1)
             adaptador.notifyDataSetChanged()
             recyclerview_lista_apps.layoutManager = layoutManager
             recyclerview_lista_apps.itemAnimator = DefaultItemAnimator()
@@ -52,15 +57,33 @@ class BuscarComprador : AppCompatActivity() {
         }
 
         boton_carrito.setOnClickListener{view: View ->
-            irAActividadCarrito()
+                irAActividadCarrito()
         }
 
     }
 
     fun irAActividadCarrito(){
+
         val intent = Intent(this,Carrito::class.java)
-        intent.putIntegerArrayListExtra("ids",arregloIds)
-        arregloIds = ArrayList()
+        /*var aplicacionesAux: ArrayList<App> = ArrayList()
+        this.aplicaciones.forEach {
+            if (it.estado == 2){
+                aplicacionesAux.add(it)
+            }
+        }
+
+        intent.putParcelableArrayListExtra("aplicaciones",aplicacionesAux)*/
+        //intent.putIntegerArrayListExtra("ids",arregloIds)
+        //arregloIds = ArrayList()
+        val aux: ArrayList<App> = ArrayList()
+
+        aplicacionesAux.forEach {
+            if (it.estado == 2){
+                aux.add(it)
+            }
+        }
+
+        intent.putParcelableArrayListExtra("aplicaciones",aplicacionesAux)
         startActivity(intent)
 
     }
@@ -108,4 +131,38 @@ class BuscarComprador : AppCompatActivity() {
             }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        this.aplicaciones = ArrayList()
+        val layoutManager = LinearLayoutManager(this)
+        adaptador = AplicacionAdaptador2(aplicaciones,1)
+        adaptador.notifyDataSetChanged()
+        recyclerview_lista_apps.layoutManager = layoutManager
+        recyclerview_lista_apps.itemAnimator = DefaultItemAnimator()
+        recyclerview_lista_apps.adapter = adaptador
+        recyclerview_lista_apps.invalidate()
+        registerForContextMenu(recyclerview_lista_apps)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        this.aplicaciones = ArrayList()
+        val layoutManager = LinearLayoutManager(this)
+        adaptador = AplicacionAdaptador2(aplicaciones,1)
+        adaptador.notifyDataSetChanged()
+        recyclerview_lista_apps.layoutManager = layoutManager
+        recyclerview_lista_apps.itemAnimator = DefaultItemAnimator()
+        recyclerview_lista_apps.adapter = adaptador
+        recyclerview_lista_apps.invalidate()
+        registerForContextMenu(recyclerview_lista_apps)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putIntegerArrayList("appIds",this.arregloIds)
+    }
+
+
 }

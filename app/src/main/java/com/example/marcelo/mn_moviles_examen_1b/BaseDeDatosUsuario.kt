@@ -12,6 +12,7 @@ class BaseDeDatosUsuario {
     companion object {
 
         val ip = "192.168.1.5:1337"
+
         fun getUsuario(usuario: String): ArrayList<Usuario> {
             val usuarios: ArrayList<Usuario> = ArrayList()
             val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
@@ -36,9 +37,5 @@ class BaseDeDatosUsuario {
             }
             return usuarios
         }
-
     }
-
-
-
 }

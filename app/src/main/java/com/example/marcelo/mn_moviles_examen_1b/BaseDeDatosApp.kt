@@ -32,6 +32,13 @@ class BaseDeDatosApp {
                     }
         }
 
+        fun putAplicacionDetalle(aplicacion: App, detalle: Int) {
+            "http://${this.ip}/Aplicaciones/${aplicacion.appid}".httpPut(listOf("detalleOrden" to detalle))
+                    .responseString { request, responde, result ->
+                        Log.d("http-ejemplo", request.toString())
+                    }
+        }
+
         fun deleteAplicacion(id: Int) {
             "http://${this.ip}/Aplicaciones/$id".httpDelete()
                     .responseString { request, response, result ->
@@ -60,11 +67,12 @@ class BaseDeDatosApp {
                 val costo = it["costo"] as Double
                 val estado = it["estado"] as Int
                 val foto = it["foto"] as String
+                val detalle = it["detalleOrden"] as Int?
                 //val latitud = it["latitud"] as Double
                 //val longitud = it["longitud"] as Double
 
                 //val app = App(id, nombre, peso, version, url, fecha, costo, latitud, longitud, idSistema, 0, 0)
-                val app = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, foto, 0, 0)
+                val app = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, detalle, foto, 0, 0)
                 aplicaciones.add(app)
             }
             return aplicaciones
@@ -92,11 +100,12 @@ class BaseDeDatosApp {
                 val costo = it["costo"] as Double
                 val idSistema = it["id"] as Int
                 val estado = it["estado"] as Int
+                val detalle = it["detalleOrden"] as Int?
                 //val latitud = it["latitud"] as Double
                 //val longitud = it["longitud"] as Double
 
                 //val app = App(id, nombre, peso, version, url, fecha, costo, latitud, longitud, idSistema, 0, 0)
-                val app = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, foto, 0, 0)
+                val app = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, detalle, foto, 0, 0)
                 aplicaciones.add(app)
             }
             return aplicaciones
@@ -124,11 +133,12 @@ class BaseDeDatosApp {
                 val costo = it["costo"] as Double
                 val idSistema = it["id"] as Int
                 val estado = it["estado"] as Int
+                val detalle = it["detalleOrden"] as Int?
                 //val latitud = it["latitud"] as Double
                 //val longitud = it["longitud"] as Double
 
                 //val app = App(id, nombre, peso, version, url, fecha, costo, latitud, longitud, idSistema, 0, 0)
-                val app = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, foto, 0, 0)
+                val app = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, detalle, foto, 0, 0)
                 aplicaciones.add(app)
             }
             return aplicaciones
@@ -152,7 +162,8 @@ class BaseDeDatosApp {
             val costo = app["costo"] as Double
             val idSistema = app["id"] as Int
             val estado = app["estado"] as Int
-            val aplicacion = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, foto, 0, 0)
+            val detalle = app["detalleOrden"] as Int
+            val aplicacion = App(id, nombre, peso, version, url, fecha, costo, estado, idSistema, detalle, foto, 0, 0)
 
             return aplicacion
         }

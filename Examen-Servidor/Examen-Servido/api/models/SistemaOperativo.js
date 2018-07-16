@@ -20,8 +20,8 @@ module.exports = {
     },
 
     usuario:{
-      collection: 'Usuario',
-      via:'sistemaOperativo'
+      model: 'Usuario',
+
     }
   },
 

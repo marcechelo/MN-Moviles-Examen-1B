@@ -14,9 +14,10 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 
-class AplicacionAdaptador2(private val listaAplicaciones: List<App>) : RecyclerView.Adapter<AplicacionAdaptador2.MyViewHolder>() {
+class AplicacionAdaptador2(private val listaAplicaciones: List<App>, valor: Int) : RecyclerView.Adapter<AplicacionAdaptador2.MyViewHolder>() {
 
     private var position: Int = 0
+    var tipo = valor
 
     fun getPosition(): Int {
         return position
@@ -48,7 +49,18 @@ class AplicacionAdaptador2(private val listaAplicaciones: List<App>) : RecyclerV
 
         override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
 
-            menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Seleccionar")
+            when(tipo){
+                1 -> {
+                    menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Seleccionar")
+                }
+                2 -> {
+                    menu?.add(Menu.NONE, R.id.item_menu_editar, Menu.NONE, "Quitar")
+                }
+                else -> {
+                    Log.i("Error","Error")
+                }
+            }
+
             //menu?.add(Menu.NONE, R.id.item_menu_borrar, Menu.NONE, "Quitar")
         }
 
@@ -120,4 +132,5 @@ class AplicacionAdaptador2(private val listaAplicaciones: List<App>) : RecyclerV
     override fun getItemCount(): Int {
         return listaAplicaciones.size
     }
+
 }
