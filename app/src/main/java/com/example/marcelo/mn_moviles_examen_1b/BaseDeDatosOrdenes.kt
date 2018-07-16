@@ -15,7 +15,7 @@ class BaseDeDatosOrdenes {
 
     companion object {
 
-        val ip = "192.168.1.5:1337"
+        val ip = "172.31.104.20:1337"
         var identificador = 0
         fun postOrden(orden: Ordenes): Int {
             identificador += 1

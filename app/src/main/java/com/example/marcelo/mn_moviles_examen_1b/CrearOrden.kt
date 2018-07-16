@@ -30,6 +30,8 @@ class CrearOrden : AppCompatActivity() {
             }
         }
 
+        text_total.text = total.toString()
+
         boton_guardar.setOnClickListener{view: View ->
             crearOrden()
         }
@@ -48,9 +50,9 @@ class CrearOrden : AppCompatActivity() {
         BaseDeDatosDetalle.postDetalle(DetalleOrden(0,this.total,identificador,0 ,0))
         val idDetalle = BaseDeDatosDetalle.getDetalle(identificador)
 
-        /*aplicacionesAux.forEach {
-            BaseDeDatosApp.putAplicacionDetalle(it,idDetalle[0].id)
-        }*/
+        aplicacionesAux.forEach {
+            BaseDeDatosApp.putAplicacionDetalle(it,identificador)
+        }
 
     }
 

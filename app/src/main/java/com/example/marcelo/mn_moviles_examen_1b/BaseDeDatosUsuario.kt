@@ -11,7 +11,7 @@ class BaseDeDatosUsuario {
 
     companion object {
 
-        val ip = "192.168.1.5:1337"
+        val ip = "172.31.104.20:1337"
 
         fun getUsuario(usuario: String): ArrayList<Usuario> {
             val usuarios: ArrayList<Usuario> = ArrayList()

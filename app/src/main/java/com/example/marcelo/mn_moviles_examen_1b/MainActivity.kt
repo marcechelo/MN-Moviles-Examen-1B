@@ -25,7 +25,10 @@ class MainActivity : AppCompatActivity() {
         text_password.setOnClickListener {view: View ->
             text_password.text.clear()
         }
-        boton_ingresar.setOnClickListener{view: View -> logIn()}
+        boton_ingresar.setOnClickListener{view: View ->
+            logIn()
+            finish()
+        }
 
     }
 

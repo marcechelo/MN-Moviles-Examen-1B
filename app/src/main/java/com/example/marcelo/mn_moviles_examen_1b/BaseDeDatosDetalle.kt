@@ -14,7 +14,7 @@ class BaseDeDatosDetalle {
 
     companion object {
 
-        val ip = "192.168.1.5:1337"
+        val ip = "172.31.104.20:1337"
         fun postDetalle(detalle: DetalleOrden) {
             "http://${this.ip}/DetalleOrden".httpPost(listOf("orden" to detalle.idOrden, "precio" to detalle.precio))
                     .responseString { request, response, result ->

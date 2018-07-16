@@ -9,7 +9,7 @@ class BaseDeDatosSo {
 
     companion object {
 
-        val ip = "192.168.1.5:1337"
+        val ip = "172.31.104.20:1337"
         fun postSistemaOperativo(sistema: SO) {
             "http://${this.ip}/SistemaOperativo".httpPost(listOf("nombreSo" to sistema.nombre, "versionApi" to sistema.versionApi, "fechaLanzamiento" to sistema.fechaLanzamiento, "pesoGigasSo" to sistema.pesoEnGigas, "instalado" to sistema.instalado))
                     .responseString { request, response, result ->

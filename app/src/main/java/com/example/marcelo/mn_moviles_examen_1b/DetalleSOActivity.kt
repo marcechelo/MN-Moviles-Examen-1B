@@ -55,11 +55,16 @@ class DetalleSOActivity : AppCompatActivity() {
             finish()
         }
 
-        /*boton_mapa.setOnClickListener { view: View ->
-            irAAtividadMapa()
+        boton_mapa.setOnClickListener { view: View ->
+            irAAtividadLogin()
             finish()
-        }*/
+        }
 
+    }
+
+    fun irAAtividadLogin() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(this, intent, null)
     }
 
     fun irAAtividadCrearApp() {
